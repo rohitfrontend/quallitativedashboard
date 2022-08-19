@@ -1,0 +1,216 @@
+[
+    {
+        "city": "Delhi",
+        "latitude": "28.6600",
+        "longitude": "77.2300",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Delhi",
+        "capital": "admin",
+        "population": "29617000",
+        "population_proper": "16753235"
+    },
+    {
+        "city": "Mumbai",
+        "latitude": "18.9667",
+        "longitude": "72.9999",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Mah\u0101r\u0101shtra",
+        "capital": "admin",
+        "population": "23355000",
+        "population_proper": "12478447"
+    },
+    {
+        "city": "Kolk\u0101ta",
+        "latitude": "22.5411",
+        "longitude": "88.3378",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "West Bengal",
+        "capital": "admin",
+        "population": "17560000",
+        "population_proper": "4496694"
+    },
+    {
+        "city": "Bangalore",
+        "latitude": "12.9699",
+        "longitude": "77.5980",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Karn\u0101taka",
+        "capital": "admin",
+        "population": "13707000",
+        "population_proper": "8443675"
+    },
+    {
+        "city": "Chennai",
+        "latitude": "13.0825",
+        "longitude": "80.2750",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Tamil N\u0101du",
+        "capital": "admin",
+        "population": "11324000",
+        "population_proper": "6727000"
+    },
+    {
+        "city": "Hyder\u0101b\u0101d",
+        "latitude": "17.3667",
+        "longitude": "78.4667",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Telangana",
+        "capital": "admin",
+        "population": "9746000",
+        "population_proper": "6993262"
+    },
+    {
+        "city": "Pune",
+        "latitude": "18.5196",
+        "longitude": "73.8553",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Mah\u0101r\u0101shtra",
+        "capital": "",
+        "population": "7764000",
+        "population_proper": "3124458"
+    },
+    {
+        "city": "Ahmad\u0101b\u0101d",
+        "latitude": "23.0300",
+        "longitude": "72.5800",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Gujar\u0101t",
+        "capital": "minor",
+        "population": "7410000",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    },
+    {
+        "city": "Kandy",
+        "latitude": "7.290287130927667",
+        "longitude": "80.6244073139853",
+        "country": "Shrilanka",
+        "population_proper": "5570585"
+    }
+]

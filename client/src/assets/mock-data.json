@@ -1,0 +1,190 @@
+{
+    "status": 200,
+    "code": "success",
+    "data": {
+        "widget_data": {
+            "id": 4,
+            "name": "Top Language",
+            "report_type": "18",
+            "user_id": 2280,
+            "client_id": "123",
+            "dashboard_id": 1,
+            "type": 10,
+            "graph_type": 10,
+            "from_date": "2020-01-01T18:30:00.000Z",
+            "to_date": "2021-01-01T18:30:00.000Z",
+            "date_granularity": "day",
+            "channel_type": null,
+            "createdAt": "2020-12-24T14:09:33.183Z",
+            "updatedAt": "2020-12-24T14:09:33.183Z",
+            "topic_ids": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        "graph_data": [
+            {
+                "topic_id": 4,
+                "topic_name": "T4",
+                "post_count": [
+                    {
+                        "lang": null,
+                        "count": "67"
+                    },
+                    {
+                        "lang": "en",
+                        "count": "1"
+                    }
+                ]
+            },
+            {
+                "topic_id": 3,
+                "topic_name": "T3",
+                "post_count": [
+                    {
+                        "lang": null,
+                        "count": "173"
+                    },
+                    {
+                        "lang": "en",
+                        "count": "17"
+                    },
+                    {
+                        "lang": "tl",
+                        "count": "4"
+                    },
+                    {
+                        "lang": "th",
+                        "count": "1"
+                    },
+                    {
+                        "lang": "ja",
+                        "count": "1"
+                    },
+                    {
+                        "lang": "und",
+                        "count": "1"
+                    },
+                    {
+                        "lang": "hi",
+                        "count": "1"
+                    },
+                    {
+                        "lang": "ar",
+                        "count": "1"
+                    }
+                ]
+            },
+            {
+                "topic_id": 2,
+                "topic_name": "T2",
+                "post_count": [
+                    {
+                        "lang": null,
+                        "count": "106"
+                    },
+                    {
+                        "lang": "en",
+                        "count": "67"
+                    },
+                    {
+                        "lang": "in",
+                        "count": "5"
+                    },
+                    {
+                        "lang": "und",
+                        "count": "1"
+                    }
+                ]
+            },
+            {
+                "topic_id": 1,
+                "topic_name": "T1",
+                "post_count": [
+                    {
+                        "lang": null,
+                        "count": "198"
+                    },
+                    {
+                        "lang": "en",
+                        "count": "50"
+                    },
+                    {
+                        "lang": "in",
+                        "count": "29"
+                    },
+                    {
+                        "lang": "hi",
+                        "count": "12"
+                    },
+                    {
+                        "lang": "ja",
+                        "count": "11"
+                    },
+                    {
+                        "lang": "tl",
+                        "count": "11"
+                    },
+                    {
+                        "lang": "pt",
+                        "count": "9"
+                    },
+                    {
+                        "lang": "und",
+                        "count": "7"
+                    },
+                    {
+                        "lang": "es",
+                        "count": "7"
+                    },
+                    {
+                        "lang": "ko",
+                        "count": "6"
+                    },
+                    {
+                        "lang": "ar",
+                        "count": "6"
+                    },
+                    {
+                        "lang": "fr",
+                        "count": "5"
+                    },
+                    {
+                        "lang": "th",
+                        "count": "5"
+                    },
+                    {
+                        "lang": "et",
+                        "count": "4"
+                    },
+                    {
+                        "lang": "pl",
+                        "count": "4"
+                    },
+                    {
+                        "lang": "it",
+                        "count": "4"
+                    },
+                    {
+                        "lang": "ht",
+                        "count": "3"
+                    },
+                    {
+                        "lang": "vi",
+                        "count": "2"
+                    },
+                    {
+                        "lang": "fi",
+                        "count": "1"
+                    },
+                    {
+                        "lang": "lt",
+                        "count": "1"
+                    }
+                ]
+            }
+        ]
+    }
+}
