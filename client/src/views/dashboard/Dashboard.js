@@ -9,7 +9,23 @@ const Dashboard = () => {
   
     const [clientList, setClientList] = useState([]);
     const getClientList = () => {
-       console.log('myData', myData)
+      var config = {
+        method: 'POST',
+        url: 'https://betadevapi.conceptbiu.com/app/client/clientslist',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMjI4MCRHb2RyZWpfY29yQGNvbmNlcHRiaXUuY29tIn0.GH2rYa8tLt0wnTnU1sDn6nY_MCbLtQxPD_tHfn2Z_LY',
+        //   'Access-Control-Allow-Headers': 'Content-Type, 139.59.53.62ization'
+        },
+      };
+      axios(config).then((response) => {
+        console.log('response', response)
+            setClientList(response.data.result)
+          })
+          .catch(() => {
+            // handleLoginFailure({ status: UNAUTHORIZED });
+          })
+          // .finally(() => setIsLoading(false));
        setClientList(myData.result)
         //   .finally(() => setIsLoading(false));
     }

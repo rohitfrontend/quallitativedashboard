@@ -31,7 +31,7 @@ function App (props) {
             <Route exact path="/login" name="Login Page" element={<Login />} />
             {/* <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} /> */}
-            <Route path="*" name="Home" element={<RequireAuth props><DefaultLayout /></RequireAuth>} />
+            <Route path="*" name="Home" element={<RequireAuth isAuthenticated={props.isAuthenticated}><DefaultLayout /></RequireAuth>} />
           </Routes>
         </Suspense>
       </HashRouter>
@@ -41,9 +41,9 @@ function App (props) {
 
 function RequireAuth(props) {
 
-  let auth = true;
+  let auth = props.isAuthenticated;
   let location = useLocation();
-  console.log('isAuthenticated', props.isAuthenticated)
+  console.log('isAuthenticateds', props.isAuthenticated)
 
   if (!auth) {
     // Redirect them to the /login page, but save the current location they were
