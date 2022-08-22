@@ -15,7 +15,7 @@ const Dashboard = () => {
         headers: { 
           'Content-Type': 'application/json', 
           'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMjI4MCRHb2RyZWpfY29yQGNvbmNlcHRiaXUuY29tIn0.GH2rYa8tLt0wnTnU1sDn6nY_MCbLtQxPD_tHfn2Z_LY',
-          "Access-Control-Allow-Origin": 'http://192.168.0.221:300'
+          "Access-Control-Allow-Origin": 'http://192.168.0.221:3000'
 
         //   'Access-Control-Allow-Headers': 'Content-Type, 139.59.53.62ization'
         },
