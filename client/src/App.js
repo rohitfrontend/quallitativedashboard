@@ -41,7 +41,7 @@ function App (props) {
 
 function RequireAuth(props) {
 
-  let auth = props.isAuthenticated;
+  let auth = true;
   let location = useLocation();
   console.log('isAuthenticateds', props.isAuthenticated)
 

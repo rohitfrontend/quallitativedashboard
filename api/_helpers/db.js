@@ -20,7 +20,7 @@ async function initialize() {
 
     // init models and add them to the exported db object
     db.User = require('../users/user.model')(sequelize);
-    db.Artical = require('../artical/artical.model')(sequelize);
+    // db.Artical = require('../artical/artical.model')(sequelize);
     db.QaData = require('../artical/qa_data.model')(sequelize);
     db.QaDataProduct = require('../artical/qa_data_product.model')(sequelize);
     db.QaClientProduct = require('../artical/qa_client_product.model')(sequelize);
@@ -30,4 +30,5 @@ async function initialize() {
     
     // sync all models with database
     await sequelize.sync();
+    
 }

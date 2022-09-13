@@ -4,7 +4,7 @@ module.exports = model;
 
 function model(sequelize) {
     const attributes = {
-        article_id: { type: DataTypes.INTEGER, allowNull: true },
+        article_id: { type: DataTypes.BIGINT, allowNull: true },
         publish_date: { type: DataTypes.DATE, allowNull: true },
         publication_id: { type: DataTypes.INTEGER, allowNull: true },
         publication: { type: DataTypes.STRING, allowNull: true },
@@ -17,8 +17,8 @@ function model(sequelize) {
         suppliment_id: { type: DataTypes.INTEGER, allowNull: true },
         suppliment: { type: DataTypes.STRING, allowNull: true },
         headline: { type: DataTypes.TEXT, allowNull: true },
-        mav: { type: DataTypes.DOUBLE, allowNull: true },
-        ccm: { type: DataTypes.DOUBLE, allowNull: true },
+        mav: { type: DataTypes.TEXT, allowNull: true },
+        ccm: { type: DataTypes.TEXT, allowNull: true },
         source_id: { type: DataTypes.INTEGER, allowNull: true },
         source: { type: DataTypes.STRING, allowNull: true },
         source_name: { type: DataTypes.STRING, allowNull: true },
@@ -32,12 +32,12 @@ function model(sequelize) {
         photo_mention: { type: DataTypes.STRING, allowNull: true },
         website_type_id: { type: DataTypes.INTEGER, allowNull: true },
         website_type: { type: DataTypes.STRING, allowNull: true },
-        word_count: { type: DataTypes.INTEGER, allowNull: true },
+        word_count: { type: DataTypes.TEXT, allowNull: true },
         photo: { type: DataTypes.STRING, allowNull: true },
         press_release_id: { type: DataTypes.INTEGER, allowNull: true },
         press_release: { type: DataTypes.STRING, allowNull: true },
         page_no: { type: DataTypes.STRING, allowNull: true },
-        circlation: { type: DataTypes.INTEGER, allowNull: true },
+        circlation: { type: DataTypes.TEXT, allowNull: true },
         zone_id: { type: DataTypes.INTEGER, allowNull: true },
         zone: { type: DataTypes.STRING, allowNull: true },
         link: { type: DataTypes.STRING, allowNull: true },
@@ -50,9 +50,9 @@ function model(sequelize) {
         pe_sample_media: { type: DataTypes.INTEGER, allowNull: true },
         media_type: { type: DataTypes.STRING, allowNull: true },
         month_name: { type: DataTypes.STRING, allowNull: true },
-        monthly_visits: { type: DataTypes.INTEGER, allowNull: true },
+        monthly_visits: { type: DataTypes.TEXT, allowNull: true },
         category_A: { type: DataTypes.STRING, allowNull: true },
-        total_CCMs: { type: DataTypes.DECIMAL, allowNull: true },
+        total_CCMs: { type: DataTypes.TEXT, allowNull: true },
         vertical: { type: DataTypes.STRING, allowNull: true },
         EV: { type: DataTypes.STRING, allowNull: true },
         theme: { type: DataTypes.STRING, allowNull: true },
@@ -62,6 +62,7 @@ function model(sequelize) {
         photo_weightage: { type: DataTypes.DECIMAL, allowNull: true },
         headline_weightage: { type: DataTypes.DECIMAL, allowNull: true },
         prominence_weightage: { type: DataTypes.DECIMAL, allowNull: true },
+        prominence: { type: DataTypes.STRING, allowNull: true },
         product_weightage: { type: DataTypes.DECIMAL, allowNull: true },
         spokesperson_weightage: { type: DataTypes.DECIMAL, allowNull: true },
         word_count_weightage: { type: DataTypes.DECIMAL, allowNull: true },
@@ -70,13 +71,15 @@ function model(sequelize) {
         co_score: { type: DataTypes.DECIMAL, allowNull: true },
         circulation_web_weightage: { type: DataTypes.DECIMAL, allowNull: true },
         index_weightage: { type: DataTypes.DECIMAL, allowNull: true },
-        created_on: { type: DataTypes.DATE, allowNull: true },
         created_by: { type: DataTypes.INTEGER, allowNull: true },
-        last_modified_on: { type: DataTypes.DATE, allowNull: true },
         last_modified_by: { type: DataTypes.INTEGER, allowNull: true },
+        created_at: { type: DataTypes.DATE, allowNull: true},
+        updated_at: { type: DataTypes.DATE, allowNull: true},
+        createdAt: { type: DataTypes.DATE, allowNull: true},
+        updatedAt: { type: DataTypes.DATE, allowNull: true}
     };
 
     const options = {};
 
-    return sequelize.define('qa_data', attributes, options);
+    return sequelize.define('q_articles', attributes, options);
 }

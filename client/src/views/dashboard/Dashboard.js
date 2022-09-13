@@ -15,7 +15,7 @@ const Dashboard = () => {
         headers: { 
           'Content-Type': 'application/json', 
           'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMjI4MCRHb2RyZWpfY29yQGNvbmNlcHRiaXUuY29tIn0.GH2rYa8tLt0wnTnU1sDn6nY_MCbLtQxPD_tHfn2Z_LY',
-          "Access-Control-Allow-Origin": 'http://192.168.0.221:3000'
+          "Access-Control-Allow-Origin": 'http://localhost:3000'
 
         //   'Access-Control-Allow-Headers': 'Content-Type, 139.59.53.62ization'
         },
@@ -44,7 +44,7 @@ const Dashboard = () => {
       formData.append('year', year) 
         var config = {
             method: 'POST',
-            url: 'http://192.168.0.221:4000/artical',
+            url: 'http://localhost:4000/artical',
             data: formData
           };
         
@@ -73,8 +73,8 @@ const Dashboard = () => {
     <div class="row g-5">
       
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Upload Document</h4>
-        <form class="needs-validation" onSubmit={upload} novalidate>
+        <h4 class="mb-3">Upload Qualitative Report</h4>
+        <form class="needs-validation"  novalidate>
           <div class="row g-3">
             
 
@@ -109,10 +109,8 @@ const Dashboard = () => {
                 <option value={11}>11</option>
                 <option value={12}>12</option>
               </select>
-              {/* <div class="invalid-feedback">
-                Please provide a valid state.
-              </div> */}
-            </div>
+              
+            </div> 
             <div class="col-12">
               <label for="state" class="form-label">Year</label>
               <select class="form-select" id="state"  onChange={e => setYear(e.target.value)} required>
@@ -120,9 +118,7 @@ const Dashboard = () => {
                 <option value={2021}>2021</option>
                 <option value={2022}>2022</option>
               </select>
-              {/* <div class="invalid-feedback">
-                Please provide a valid state.
-              </div> */}
+             
             </div>
 
             <div class="col-md-3">
@@ -134,12 +130,10 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <hr class="my-4" />
+<br></br>
+<br></br>
 
-
-          <hr class="my-4" />
-
-          <button class="w-100 btn btn-primary btn-lg"  type="submit">Upload</button>
+          <button class="w-100 btn btn-primary btn-lg"  type="button" onClick={e => upload()}>Upload</button>
         </form>
       </div>
     </div>

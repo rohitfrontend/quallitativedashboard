@@ -1,11 +1,32 @@
 ﻿
 {
     "database": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "xchange123",
+        "database": "qualitative"
+    },
+    "database2": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "xchange123",
+        "database": "qualitative1_biu"
+    },
+    "livedatabase": {
         "host": "192.168.0.175",
         "port": 3306,
         "user": "testbiu",
         "password": "C0ncept@!#",
         "database": "qualitative_biu"
+    },
+    "livedatabase2": {
+        "host": "101.53.146.26",
+        "port": 3306,
+        "user": "root",
+        "password": "N<[MmAoPB~02c%i",
+        "database": "datawarehouse"
     },
     "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"   
 }
