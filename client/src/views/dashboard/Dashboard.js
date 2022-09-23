@@ -118,18 +118,18 @@ const Dashboard = () => {
               <label for="state" class="form-label">Month</label>
               <select class="form-select" id="state"  onChange={e => setMonth(e.target.value)} required>
                 <option value="">Choose...</option>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-                <option value={6}>6</option>
-                <option value={7}>7</option>
-                <option value={8}>8</option>
-                <option value={9}>9</option>
-                <option value={10}>10</option>
-                <option value={11}>11</option>
-                <option value={12}>12</option>
+                <option value={"January"}>January</option>
+                <option value={"February"}>February</option>
+                <option value={"March"}>March</option>
+                <option value={"April"}>April</option>
+                <option value={"May"}>May</option>
+                <option value={"June"}>June</option>
+                <option value={"July"}>July</option>
+                <option value={"August"}>August</option>
+                <option value={"September"}>September</option>
+                <option value={"October"}>October</option>
+                <option value={"November"}>November</option>
+                <option value={"December"}>December</option>
               </select>
               
             </div> 
@@ -139,6 +139,7 @@ const Dashboard = () => {
                 <option value="">Choose...</option>
                 <option value={2021}>2021</option>
                 <option value={2022}>2022</option>
+                <option value={2023}>2023</option>
               </select>
              
             </div>

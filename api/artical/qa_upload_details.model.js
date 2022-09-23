@@ -12,7 +12,7 @@ function model(sequelize) {
         file: { type: DataTypes.STRING, allowNull: true },
         originalname: { type: DataTypes.STRING, allowNull: true },
         filename: { type: DataTypes.STRING, allowNull: true },
-        month: { type: DataTypes.INTEGER, allowNull: true },
+        month: { type: DataTypes.STRING, allowNull: true },
         year: { type: DataTypes.INTEGER, allowNull: true },
         created_at: { type: DataTypes.DATE, allowNull: true},
         updated_at: { type: DataTypes.DATE, allowNull: true},
