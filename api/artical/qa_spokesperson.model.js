@@ -19,5 +19,5 @@ function model(sequelize) {
     const options = {
     };
 
-    return sequelize.define('sporkepeople', attributes, options);
+    return sequelize.define('spokepeople', attributes, options);
 }

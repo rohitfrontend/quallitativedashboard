@@ -12,7 +12,7 @@
         "port": 3306,
         "user": "root",
         "password": "xchange123",
-        "database": "qualitative1_biu"
+        "database": "qualitative1"
     },
     "livedatabase": {
         "host": "192.168.0.175",
@@ -28,5 +28,7 @@
         "password": "N<[MmAoPB~02c%i",
         "database": "datawarehouse"
     },
-    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"   
+    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "baseUrl": "http://192.168.0.221:4000"
+   
 }

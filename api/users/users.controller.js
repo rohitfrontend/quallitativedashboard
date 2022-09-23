@@ -17,7 +17,9 @@ exports.authenticateSchema = async function(req, res, next) {
 
 exports.authenticate = async function(req, res, next) {
     userService.authenticate(req.body)
-        .then(user => res.json(user))
+        .then(data => {
+            res.json(data.data);
+        })
         .catch(next);
 }
 
@@ -32,11 +34,18 @@ exports.registerSchema = async function(req, res, next) {
 }
 
 exports.register = async function(req, res, next) {
-    console.log('munish');
      userService.create(req.body)
         .then((user) =>{
             console.log('user',user)
             res.json({user: user, message: 'Registration successful' })
         })
         .catch(next);
+}
+
+exports.getClientList = async function(req, res, next) {
+    userService.clientlist(req.headers.authorization)
+    .then(data => {
+        res.json({clientlist: data.data.result, message: "Client list fetched successfully"});
+    })
+    .catch(next);
 }

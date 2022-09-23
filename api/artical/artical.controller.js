@@ -8,7 +8,41 @@ const XLSXWriteStream = require('xlsx-write-stream');
 const storageCustom = require('./customStorageEngine')
 
 var XLSX = require('xlsx');
-
+const states = [
+    { id:0, city: "National", state: "National"},
+    { id:99, city: "Online Web", state:"Online Web"},
+    { id: 28, city: "Ludhiana", state: "Punjab" },
+    { id: 6, city: "Chandigarh", state: "Punjab" },
+    { id: 10, city: "New Delhi", state: "New Delhi" },
+    { id: 29, city: "Jaipur", state: "Rajasthan" },
+    { id: 33, city: "Lucknow", state: "Uttar Pradesh" },
+    { id: 5, city: "Patna", state: "Bihar" },
+    { id: 4, city: "Guwahati", state: "Assam" },
+    { id: 26, city: "Bhubaneswar", state: "Odisha" },
+    { id: 7, city: "Raipur", state: "Chhattisgarh" },
+    { id: 20, city: "Indore", state: "Madhya Pradesh" },
+    { id: 12, city: "Ahmedabad", state: "Gujarat" },
+    { id: 21, city: "Pune", state: "Maharashtra" },
+    { id: 21, city: "Aurangabad", state: "Maharashtra" },
+    { id: 2, city: "Vijayawada", state: "Andhra Pradesh" },
+    { id: 17, city: "Bangalore", state: "Karnataka" },
+    { id: 18, city: "Kochi", state: "Kerala" },
+    { id: 20, city: "Bhopal", state: "Madhya Pradesh" },
+    { id: 31, city: "Chennai", state: "Tamil Nadu" },
+    { id: 36, city: "Hyderabad", state: "Telangana" },
+    { id: 16, city: "Jamshedpur", state: "Jharkhand" },
+    { id: 35, city: "Kolkata", state: "West Bengal" },
+    { id: 21, city: "Mumbai", state: "Maharashtra" },
+    { id: 16, city: "Ranchi", state: "Jharkhand" },
+    { id: 12, city: "Vadodara", state: "Gujarat"},
+    { id: 12, city: "Rajkot", state: "Gujarat"},
+    { id: 17, city:"Mangalore", state: "Karnataka"},
+    { id:12, city:"Surat", state: "Gujarat"},
+    { id: 21, city: "Nagpur", state: "Maharashtra" },
+    { id: 100, city: "Goa", state: "Goa"},
+    { id: 33, city: "Greater Noida", state: "Uttar Pradesh" },
+    { id: 33, city: "Noida", state: "Uttar Pradesh" },
+]
 
 exports.getArtical = async function (req, res, next) {
     console.log('munish');
@@ -17,8 +51,18 @@ exports.getArtical = async function (req, res, next) {
         res.json({ data: data, message: 'Artical successful' })
     })
 }
+exports.getList = async function (req, res, next) {
+    articalService.getAllListUpload().then((data) => {
+        console.log('data', data)
+        res.json({ data: data, message: 'Artical successful' })
+    })
+}
+
+
 exports.saveArtical = async function (req, res, next) {
-    var f = req.files["upload"]; // <input type="file" id="upload" name="upload">
+    console.log('file', req.files)
+    console.log('files', req.body.upload)
+    var f = req.body.upload; // <input type="file" id="upload" name="upload">
     var workbook = XLSX.readFile(f.path, { 'type': 'base64', cellDates: true, raw: true });
     var data = [];
     var sheetHeader;
@@ -58,29 +102,33 @@ exports.saveArtical = async function (req, res, next) {
         data.shift();
     });
 
-    let result = await Promise.all(data.map(async (e) => {
+    const addUploadDetails = new Promise((resolve, reject) => {
+        articalService.addUploadDetails({
+            username: req.body.username,
+            email: req.body.email,
+            client_id: req.body.client_id,
+            client_name: req.body.client_name,
+            month: req.body.month,
+            year: req.body.year,
+            ip_address: req.body.ip_address,
+            file: f.url,
+            filename: f.filename,
+            originalname: f.originalname
+        })
+    });
+
+    Promise.all([addUploadDetails, data.map(async (e, index) => {
         const art = parseInt(e['article id']);
         if (art !== 0 && !isNaN(art)) {
-            
-            articalService.getAll(req.fields.client_id, e['article id'], e['company name'], e['media type']).then( async(dbdata) => {
 
+            articalService.getAll(req.body.client_id, e['article id'], e['company name'], e['media type']).then( async(dbdata) => {
+                const state_name = states.filter(state => state.city === e['edition']);
                 qa_data = {
-                        // publication_id: dbdata[0].publication_id,
-                        // edition_id: dbdata[0].edition_id,
-                        // publication_type_id: dbdata[0].publication_type_id,
-                        // language_id: dbdata[0].language_id,
-                        // suppliment_id: dbdata[0].suppliment_id,
-                        // source_id: dbdata[0].source_id,    
-                        // cav_id: dbdata[0].cav_id,
-                        // client_name: dbdata[0].client_name,
-                        // entity_id: dbdata[0].entity_id,  
-                        // zone_id: dbdata[0].zone_id,
-                        // prominent_id: dbdata[0].prominent_id,
-                        // section_id: dbdata[0].section_id,              
+                        
+                        state_name: state_name[0].state,              
                         article_id: e['article id'],
-                        client_id: req.fields.client_id,
+                        client_id: req.body.client_id,
                         media_type: e['media type'],
-                        agency: e['agency'],
                         photo_mention: e['photo mention'],
                         headline: e['headline'],
                         headline_mention: e['headline mention'],
@@ -99,7 +147,6 @@ exports.saveArtical = async function (req, res, next) {
                         circulation_web_weightage: e["cir ('000) & web wtg"],
                         co_score: e['co score'],
                         edition: e['edition'],
-                        publish_date1: e['publish date'],
                         publish_date: moment(e['publish date']).format('YYYY-MM-DD'),
                         mav: e['mav'],
                         ccm: e['ccm'],
@@ -122,7 +169,8 @@ exports.saveArtical = async function (req, res, next) {
                         index_weightage: e['index'],
                         source_name: e['journalist'],
                         entity_name: e['company name'],
-                        prominence: e['prominence']
+                        prominence: e['prominence'],
+                        client_name : req.body.client_name
                     }
                 if(e['media type'] === 'Print'){
                     const [print_data, created] = dbdata;
@@ -134,11 +182,13 @@ exports.saveArtical = async function (req, res, next) {
                     qa_data.suppliment_id= print_data.dataValues.suppliment_id,
                     qa_data.source_id = print_data.dataValues.source_id
                     qa_data.cav_id = print_data.dataValues.cav_id
-                    qa_data.client_name = req.fields.client_name
                     qa_data.entity_id = print_data.dataValues.entity_id
                     qa_data.zone_id = print_data.dataValues.zone_id
                     qa_data.prominent_id = print_data.dataValues.prominent_id
                     qa_data.section_id = print_data.dataValues.section_id
+                    }
+                    else{
+
                     }
                 }
                 if(e['media type'] === 'Online'){
@@ -151,14 +201,13 @@ exports.saveArtical = async function (req, res, next) {
                     qa_data.suppliment_id= online_data.dataValues.suppliment_id,
                     qa_data.source_id = online_data.dataValues.source_id
                     qa_data.cav_id = online_data.dataValues.cav_id
-                    qa_data.client_name = req.fields.client_name
                     qa_data.entity_id = online_data.dataValues.entity_id
                     qa_data.zone_id = online_data.dataValues.zone_id
                     qa_data.prominent_id = online_data.dataValues.prominent_id
                     qa_data.section_id = online_data.dataValues.section_id
                    }
                 }
-                
+                console.log('data.length',data.length)
                 await articalService.createQaData(qa_data).then(async (artical) => {
                     const [q_articles, created] = artical;
 
@@ -204,9 +253,11 @@ exports.saveArtical = async function (req, res, next) {
             })
         }
 
-    }))
+    })]).then((values) => {
+        console.log('values',values); // [3, 1337, "foo"]
+      });
 
-    res.json({ message: 'Artical successfully uploded', data: {} });
+    res.json({ message: 'Artical upload processing', data: {} });
 }
 
 

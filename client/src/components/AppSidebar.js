@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { DashboardIcon } from "../Icons/icons.component";
+import { DashboardIcon, AnalysisIcon } from "../Icons/icons.component";
+import { NavLink } from 'react-router-dom';
 
 import './sidebars.css'
 const AppSidebar = () => {
@@ -16,16 +17,16 @@ const AppSidebar = () => {
     </a>
     <ul className="nav nav-pills nav-flush flex-column mb-auto text-center">
       <li className="nav-item">
-        <a href="#" className="nav-link active py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+        <NavLink to="/dashboard" className="nav-link  py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
           <DashboardIcon />
-        </a>
+        </NavLink>
       </li>
-      {/* <li>
-        <a href="#" className="nav-link py-3 border-bottom" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg className="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlinkHref="#speedometer2"/></svg>
-        </a>
+       <li>
+        <NavLink to="/view-upload" className="nav-link py-3 border-bottom" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+         <AnalysisIcon />
+        </NavLink>
       </li>
-      <li>
+     {/* <li>
         <a href="#" className="nav-link py-3 border-bottom" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
           <svg className="bi" width="24" height="24" role="img" aria-label="Orders"><use xlinkHref="#table"/></svg>
         </a>

@@ -10,6 +10,7 @@ function model(sequelize) {
         publication: { type: DataTypes.STRING, allowNull: true },
         edition_id: { type: DataTypes.INTEGER, allowNull: true },
         edition: { type: DataTypes.STRING, allowNull: true },
+        state_name: { type: DataTypes.STRING, allowNull: true },
         publication_type_id: { type: DataTypes.INTEGER, allowNull: true },
         publication_type: { type: DataTypes.STRING, allowNull: true },
         language_id: { type: DataTypes.INTEGER, allowNull: true },

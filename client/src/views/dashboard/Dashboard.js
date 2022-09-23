@@ -1,58 +1,69 @@
 import React, { Component, useState, useEffect } from 'react'
+import Select from 'react-select'
 
 
 import axios from 'axios';
-// import { get } from "../../../services/CommanService";
+import { get , post } from "../../services/CommanService";
 import myData from '../../assets/geoJson/client.json';
+import { store } from '../../store/store';
 
 const Dashboard = () => {
-  
+  const state = store.getState();
+  console.log('state', state)
     const [clientList, setClientList] = useState([]);
-    const getClientList = () => {
-      var config = {
-        method: 'POST',
-        url: 'https://betadevapi.conceptbiu.com/app/client/clientslist',
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMjI4MCRHb2RyZWpfY29yQGNvbmNlcHRiaXUuY29tIn0.GH2rYa8tLt0wnTnU1sDn6nY_MCbLtQxPD_tHfn2Z_LY',
-          "Access-Control-Allow-Origin": 'http://localhost:3000'
+    // const getClientList = () => {
+    //   var config = {
+    //     method: 'POST',
+    //     url: 'https://betadevapi.conceptbiu.com/app/client/clientslist',
+    //     headers: { 
+    //       'Content-Type': 'application/json', 
+    //       'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMjI4MCRHb2RyZWpfY29yQGNvbmNlcHRiaXUuY29tIn0.GH2rYa8tLt0wnTnU1sDn6nY_MCbLtQxPD_tHfn2Z_LY',
+    //       "Access-Control-Allow-Origin": 'http://localhost:3000'
 
-        //   'Access-Control-Allow-Headers': 'Content-Type, 139.59.53.62ization'
-        },
-      };
-      axios(config).then((response) => {
-        console.log('response', response)
-            setClientList(response.data.result)
-          })
-          .catch(() => {
-            // handleLoginFailure({ status: UNAUTHORIZED });
-          })
-          // .finally(() => setIsLoading(false));
-       setClientList(myData.result)
-        //   .finally(() => setIsLoading(false));
-    }
+    //     //   'Access-Control-Allow-Headers': 'Content-Type, 139.59.53.62ization'
+    //     },
+    //   };
+    //   post("users/clientlist").then((response) => {
+    //     console.log('response', response)
+    //         setClientList(response.data.result)
+    //       })
+    //       .catch(() => {
+    //         // handleLoginFailure({ status: UNAUTHORIZED });
+    //       })
+    //       // .finally(() => setIsLoading(false));
+    //    setClientList(myData.result)
+    //     //   .finally(() => setIsLoading(false));
+    // }
     const [client_id, setClientId] = useState()
+    const [client_name, setClientName] = useState()
     const [month, setMonth] = useState()
     const [year, setYear] = useState()
+    const [isLoading, setIsLoading] = useState(false)
     const upload = async () => {
-
+      setIsLoading(true);
+      setClientName();
+      setClientId()
         const formData = new FormData(); 
      
-      formData.append('file', file);
+      formData.append('upload', file);
       formData.append('client_id', client_id);
+      formData.append('client_name', client_name);
       formData.append('month', month)
       formData.append('year', year) 
+      formData.append('username', state.auth.auth.first_name + ' '+  state.auth.auth.last_name);
+      formData.append('email', state.auth.auth.email)
+      formData.append('ip_address', "ip_address")
         var config = {
             method: 'POST',
-            url: 'http://localhost:4000/artical',
+            url: 'http://192.168.0.221:4000/artical',
             data: formData
           };
         
         return axios(config).then((response) => {
-                
-               console.log(response)
+                setIsLoading(false)
               })
               .catch(() => {
+                setIsLoading(false)
                 // handleLoginFailure({ status: UNAUTHORIZED });
               })
             //   .finally(() => setIsLoading(false));;
@@ -63,13 +74,20 @@ const Dashboard = () => {
         setFile(event.target.files[0]); 
       }; 
 
+    const clientChange = (e) => {
+      setClientName(e.label);
+      setClientId(e.value)
+    }
+
     useEffect(() => {
-        getClientList();
-      }, []);
+        // getClientList();
+        setClientList(myData.result)
+      }, [myData]);
     return (
         <>
-    
-
+    {isLoading && 
+    <div id="cover-spin"></div>
+}
     <div class="row g-5">
       
       <div class="col-md-7 col-lg-8">
@@ -80,13 +98,17 @@ const Dashboard = () => {
 
           <div class="col-12">
               <label for="country" class="form-label">Client</label>
-              <select class="form-select" onChange={e => setClientId(e.target.value)} id="country" required>
+              {/* <select class="form-select" onChange={e => setClientId(e.target.value)} id="country" required>
                 <option value="">Choose...</option>
                 {clientList?.map((item, index) => (
                     <option value={item.id}>{item.client_name}</option>
                 ))}
                 
-              </select>
+              </select> */}
+              <Select onChange={e => clientChange(e)} options={clientList?.map((e) => ( {
+                value: e.id,
+                label: e.client_name
+}))} />
               {/* <div class="invalid-feedback">
                 Please select a valid country.
               </div> */}
@@ -133,7 +155,7 @@ const Dashboard = () => {
 <br></br>
 <br></br>
 
-          <button class="w-100 btn btn-primary btn-lg"  type="button" onClick={e => upload()}>Upload</button>
+          <button class="w-100 btn btn-primary btn-lg"  type="reset" onClick={e => upload()}>Upload</button>
         </form>
       </div>
     </div>

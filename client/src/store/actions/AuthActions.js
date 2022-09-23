@@ -44,10 +44,11 @@ export function loginAction(name, password, navigate) {
   return (dispatch) => {
     login(name, password)
       .then((response) => {
+        console.log('response.data', response.data)
         if (response.status === 200) {
-          saveTokenInLocalStorage(response.data);
+          saveTokenInLocalStorage(response.data.result);
           // runLogoutTimer(dispatch, 3600 * 1000, history);
-          dispatch(loginConfirmedAction(response.data));
+          dispatch(loginConfirmedAction(response.data.result));
           navigate("/");
         } else {
           const errorMessage = formatError("INVALID_PASSWORD");
