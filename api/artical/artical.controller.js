@@ -45,62 +45,57 @@ const states = [
 ]
 
 exports.getArtical = async function (req, res, next) {
-    console.log('munish');
-    articalService.getAll(8, 221482940, 'Ashok Leyland').then((data) => {
-        console.log('data', data)
-        res.json({ data: data, message: 'Artical successful' })
-    })
-}
+    let edition = await articalService.getEdition('Online Web');
+    res.json({ edition: edition, message: 'Edition successful' })
+}   
 exports.getList = async function (req, res, next) {
     articalService.getAllListUpload().then((data) => {
-        console.log('data', data)
         res.json({ data: data, message: 'Artical successful' })
     })
 }
 
 
 exports.saveArtical = async function (req, res, next) {
-    console.log('file', req.files)
-    console.log('files', req.body.upload)
+    console.log('files', req.body)
     var f = req.body.upload; // <input type="file" id="upload" name="upload">
     var workbook = XLSX.readFile(f.path, { 'type': 'base64', cellDates: true, raw: true });
     var data = [];
-    var sheetHeader;
-    var sheet_name_list1 = workbook.SheetNames;
-    let sheet_name_list = [];
-    sheet_name_list.push(sheet_name_list1[0]);
-    sheet_name_list.forEach(function (y) {
-        var worksheet = workbook.Sheets[y];
-        var a = {};
-        var headers = {};
-        // var data = [];
-        var result = [];
-        for (z in worksheet) {
-            if (z[0] === '!') continue;
-            //parse out the column, row, and value
-            var tt = 0;
-            for (var i = 0; i < z.length; i++) {
-                if (!isNaN(z[i])) {
-                    tt = i;
-                    break;
-                }
-            };
-            var col = z.substring(0, tt);
-            var row = parseInt(z.substring(tt));
-            var value = worksheet[z].v === 'Link' ? worksheet[z].l?.Target : worksheet[z].v;
-            //store header names
-            if (row == 1 && value) {
-                headers[col] = value.toLowerCase();
-                sheetHeader = headers;
-                continue;
-            }
+    // var sheetHeader;
+    // var sheet_name_list1 = workbook.SheetNames;
+    // let sheet_name_list = [];
+    // sheet_name_list.push(sheet_name_list1[0]);
+    // sheet_name_list.forEach(function (y) {
+    //     var worksheet = workbook.Sheets[y];
+    //     var a = {};
+    //     var headers = {};
+    //     // var data = [];
+    //     var result = [];
+    //     for (z in worksheet) {
+    //         if (z[0] === '!') continue;
+    //         //parse out the column, row, and value
+    //         var tt = 0;
+    //         for (var i = 0; i < z.length; i++) {
+    //             if (!isNaN(z[i])) {
+    //                 tt = i;
+    //                 break;
+    //             }
+    //         };
+    //         var col = z.substring(0, tt);
+    //         var row = parseInt(z.substring(tt));
+    //         var value = worksheet[z].v === 'Link' ? worksheet[z].l?.Target : worksheet[z].v;
+    //         //store header names
+    //         if (row == 1 && value) {
+    //             headers[col] = value.toLowerCase();
+    //             sheetHeader = headers;
+    //             continue;
+    //         }
 
-            if (!data[row]) data[row] = {};
-            data[row][headers[col]] = value;
-        }
-        data.shift();
-        data.shift();
-    });
+    //         if (!data[row]) data[row] = {};
+    //         data[row][headers[col]] = value;
+    //     }
+    //     data.shift();
+    //     data.shift();
+    // });
 
     const addUploadDetails = new Promise((resolve, reject) => {
         articalService.addUploadDetails({
@@ -117,19 +112,37 @@ exports.saveArtical = async function (req, res, next) {
         })
     });
 
-    Promise.all([addUploadDetails, data.map(async (e, index) => {
+    const addSetting = new Promise((resolve, reject) => {
+        JSON.parse(req.body.setting).map(async (e, index) => {
+            articalService.addSetting({
+                client_id: req.body.client_id,
+                entity_level: e.entity_level,
+                publication_level: e.publication_level,
+                journalist_level: e.journalist_level,
+                city_level: e.city_level,
+                keyword_level: e.keyword_level,
+                graph_type: e.graph_type,
+                spokesperson_level: e.spokesperson_level,
+                profiling_level: e.profiling_level,
+                visibility_level: e.visibility_level
+            })
+        })
+    });
+
+    Promise.all([addUploadDetails, addSetting, data.map(async (e, index) => {
         const art = parseInt(e['article id']);
         if (art !== 0 && !isNaN(art)) {
 
             articalService.getAll(req.body.client_id, e['article id'], e['company name'], e['media type']).then( async(dbdata) => {
                 const state_name = states.filter(state => state.city === e['edition']);
+                const edition =  e['media type'] === "Print" ? await articalService.getEdition(e['edition']) : {id: null};
                 qa_data = {
                         
                         state_name: state_name[0].state,              
                         article_id: e['article id'],
                         client_id: req.body.client_id,
                         media_type: e['media type'],
-                        photo_mention: e['photo mention'],
+                        photo_mention: e['photo'],
                         headline: e['headline'],
                         headline_mention: e['headline mention'],
                         prominence: e['prominence'],
@@ -170,13 +183,14 @@ exports.saveArtical = async function (req, res, next) {
                         source_name: e['journalist'],
                         entity_name: e['company name'],
                         prominence: e['prominence'],
-                        client_name : req.body.client_name
+                        client_name : req.body.client_name,
+                        edition_id: edition?.id
                     }
                 if(e['media type'] === 'Print'){
                     const [print_data, created] = dbdata;
                     if(print_data){
                     qa_data.publication_id = print_data.dataValues.publication_id;
-                    qa_data.edition_id = print_data.dataValues.edition_id,
+                    // qa_data.edition_id = print_data.dataValues.edition_id,
                     qa_data.publication_type_id = print_data.dataValues.publication_type_id
                     qa_data.language_id = print_data.dataValues.language_id
                     qa_data.suppliment_id= print_data.dataValues.suppliment_id,
@@ -195,7 +209,7 @@ exports.saveArtical = async function (req, res, next) {
                    const [online_data, created] = dbdata;
                    if(online_data) {
                    qa_data.publication_id = online_data.dataValues.publication_id;
-                    qa_data.edition_id = online_data.dataValues.edition_id,
+                    // qa_data.edition_id = online_data.dataValues.edition_id,
                     qa_data.publication_type_id = online_data.dataValues.publication_type_id
                     qa_data.language_id = online_data.dataValues.language_id
                     qa_data.suppliment_id= online_data.dataValues.suppliment_id,
@@ -207,46 +221,51 @@ exports.saveArtical = async function (req, res, next) {
                     qa_data.section_id = online_data.dataValues.section_id
                    }
                 }
-                console.log('data.length',data.length)
-                await articalService.createQaData(qa_data).then(async (artical) => {
-                    const [q_articles, created] = artical;
-
-                    const spokesman = Object.entries(e).filter((e, v) => e[0].match(/spokesperson [0-9]/g) && e[1] !== 0)
-                    if (spokesman.length !== 0) {
-                        spokesman?.filter(async (s) => {
-                            const sperson = {
-                                spokesperson_name: s[1]
-                            }
-                            await articalService.createQaSpokesPerson(sperson).then(async (sps) => {
-                                const [sporkepeople, created] = sps;
-                               
-                                const spersondata = {
-                                    spokesperson_id: sporkepeople.id,
-                                    q_article_id: q_articles.id,
-                                    spokesperson_profiling: e['spokesperson profiling']
+                // console.log('qa_data', qa_data)
+                await articalService.createQaData(qa_data).then(async (q_articles) => {
+                    // const [q_articles, created] = q_articles;
+                    console.log('created', q_articles)
+                    // if(created === false) {
+                    //     await articalService.updateQaData(qa_data, q_articles)
+                    // }
+                    if(q_articles){
+                        const spokesman = Object.entries(e).filter((e, v) => e[0].match(/spokesperson [0-9]/g) && e[1] !== 0)
+                        if (spokesman.length !== 0) {
+                            spokesman?.filter(async (s) => {
+                                const sperson = {
+                                    spokesperson_name: s[1]
                                 }
-                                await articalService.createQaDataSpokesPerson(spersondata)
-                            })
-
-                        })
-                    }
-                    const products = Object.entries(e).filter((e, v) => e[0].match(/product name [0-9]/g) && e[1] !== 0)
-                    if (products.length !== 0) {
-                        products?.filter(async (p) => {
-                            const product = {
-                                product_name: p[1]
-                            }
-                            await articalService.createQaClientProduct(product).then(async (pro) => {
-                                const [products, created] = pro;
+                                await articalService.createQaSpokesPerson(sperson).then(async (sps) => {
+                                    const [sporkepeople, created] = sps;
                                 
-                                const spersondata = {
-                                    product_id: products.id,
-                                    q_article_id: q_articles.id
-                                }
-                                await articalService.createQaDataProduct(spersondata)
-                            })
+                                    const spersondata = {
+                                        spokesperson_id: sporkepeople.id,
+                                        q_article_id: q_articles?.id,
+                                        spokesperson_profiling: e['spokesperson profiling']
+                                    }
+                                    await articalService.createQaDataSpokesPerson(spersondata)
+                                })
 
-                        })
+                            })
+                        }
+                        const products = Object.entries(e).filter((e, v) => e[0].match(/product name [0-9]/g) && e[1] !== 0)
+                        if (products.length !== 0) {
+                            products?.filter(async (p) => {
+                                const product = {
+                                    product_name: p[1]
+                                }
+                                await articalService.createQaClientProduct(product).then(async (pro) => {
+                                    const [products, created] = pro;
+                                    
+                                    const spersondata = {
+                                        product_id: products.id,
+                                        q_article_id: q_articles?.id
+                                    }
+                                    await articalService.createQaDataProduct(spersondata)
+                                })
+
+                            })
+                        }
                     }
                 });
 
@@ -330,29 +349,34 @@ exports.processExcel = function (req, res) {
     });
 }
 
-exports.processExcels = function (req, res) {
-    // add writer stream variable in req so it can be accessed from custom storage
-    req.xlsxWriter = new XLSXWriteStream();
-    let u = upload.single('upload');
+exports.addSetting = async function(req, res, next) {
+    articalService.addSetting(req.body)
+       .then((setting) =>{
+           res.json({setting: setting, message: 'Setting added successful' })
+       })
+       .catch(next);
+}
 
-    console.log("starting upload")
-    u(req, res, (err) => {
-        if (err) {
-            console.log(err)
-            // An error occurred when uploading
-            return res.send({
-                success: false,
-                message: err.message
-            });
+exports.getSetting = async function(req, res, next) {
+    articalService.getSetting(req.params.client_id)
+   .then(data => {
+       res.json({settings: data, message: "Client setting fetched successfully"});
+   })
+   .catch(next);
+}
 
-        }
+exports.getSetting = async function(req, res, next) {
+    articalService.getSetting(req.params.client_id)
+   .then(data => {
+       res.json({settings: data, message: "Client setting fetched successfully"});
+   })
+   .catch(next);
+}
 
-        //write excel file stream to res
-        const xlsxStream = req.xlsxWriter.getOutputStream();
-        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        res.setHeader("Content-Disposition", "attachment; filename=test.xlsx");
-        
-        xlsxStream.pipe(res);
-
-    })
+exports.getQualitativeCheck = async function(req, res, next) {
+    articalService.getQualitativeCheck(req.params.client_id)
+   .then(data => {
+       res.json({qualitative: data > 0 ? true : false , message: "Client Qualitative fetched successfully"});
+   })
+   .catch(next);
 }

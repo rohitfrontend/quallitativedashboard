@@ -2,6 +2,7 @@
 const db = require('_helpers/db');
 const db2 = require('_helpers/db2');
 const { Op } = require("sequelize");
+const { func } = require('joi');
 
 module.exports = {
     getAll,
@@ -14,7 +15,13 @@ module.exports = {
     createQaClientProduct,
     createQaDataProduct,
     addUploadDetails,
-    getAllListUpload
+    getAllListUpload,
+    getEdition,
+    updateQaData,
+    addQaData,
+    getSetting,
+    addSetting,
+    getQualitativeCheck
 };
 
 
@@ -63,14 +70,52 @@ async function _delete(id) {
 
 // helper functions
 
+
+
 async function getArtical(id) {
     const artical = await db.Artical.findByPk(id);
     if (!artical) throw 'Artical not found';
     return artical;
 }
 
+async function getEdition(name) {
+    const edition = await db.Edition.findOne({ where: { edition_name: name }, attributes: [`id`, `edition_name`] });;
+    return edition;
+}
+async function addQaData(params) {
+    return await db.QaData.create(params);
+}   
+
 async function createQaData(params) {
-    return await db.QaData.findOrCreate({ where: { article_id: params.article_id }, defaults: params });
+    //check article id and cav id if there cavid
+    if(params?.cav_id){
+        const { count, rows } = await db.QaData.findAndCountAll({ where: {  article_id: params.article_id, cav_id: params?.cav_id }})
+        if(count === 0){
+            return addQaData(params);
+        }
+        if(count === 1){
+            return updateQaData(params, rows[0])
+        }
+    }else{
+        if(params?.media_type === 'Print'){
+            const { count, rows } = await db.QaData.findAndCountAll({ where: {  article_id: params.article_id, edition_id: params?.edition_id }})
+            if(count === 0){
+                return addQaData(params);
+            }
+            if(count === 1){
+                return updateQaData(params, rows[0])
+            }
+        }
+        else{
+            return addQaData(params);
+        }
+    }
+    
+}
+
+async function updateQaData(params, article) {
+    await db.QaData.update(params, { where: { id: article.id } });
+    return db.QaData.findOne({ where: { id: article.id } });
 }
 
 async function createQaSpokesPerson(params) {
@@ -80,7 +125,7 @@ async function createQaSpokesPerson(params) {
 
 async function createQaDataSpokesPerson(params) {
 
-    await db.QaDataSpokesPerson.create(params);
+    await db.QaDataSpokesPerson.findOrCreate({ where: { spokesperson_id: params.spokesperson_id, q_article_id : params.q_article_id }, defaults: params });
 }
 
 async function createQaClientProduct(params) {
@@ -90,10 +135,44 @@ async function createQaClientProduct(params) {
 
 async function createQaDataProduct(params) {
 
-    await db.QaDataProduct.create(params);
+    await db.QaDataProduct.findOrCreate({ where: { product_id: params.product_id, q_article_id : params.q_article_id }, defaults: params });
 }
 
 async function addUploadDetails(params) {
 
     await db.QaUploadDetail.create(params);
+}
+
+
+
+async function addSetting(params) {
+    const [row, created] = await db.QaSetting.findOrCreate({ where: { client_id: params.client_id, graph_type: params.graph_type  }, defaults: params });
+    if(created === true){
+        await db.QaSetting.update(params, { where: { id: row.id } });
+    }
+    return created;
+}
+
+async function getSetting(client_id) {
+    const result = await db.QaSetting.findAll({
+        where: { client_id: client_id },
+        attributes: ["id",
+        "client_id",
+        "graph_type",
+        "entity_level",
+        "publication_level",
+        "journalist_level",
+        "city_level",
+        "keyword_level",
+        "spokesperson_level",
+        "profiling_level",
+        "visibility_level" ]
+      });
+    return result;
+}
+async function getQualitativeCheck(client_id) {
+    const { count, rows }  = await db.QaData.findAndCountAll({
+        where: { client_id: client_id }
+      });
+    return count;
 }

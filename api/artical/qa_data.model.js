@@ -75,9 +75,19 @@ function model(sequelize) {
         created_by: { type: DataTypes.INTEGER, allowNull: true },
         last_modified_by: { type: DataTypes.INTEGER, allowNull: true },
         created_at: { type: DataTypes.DATE, allowNull: true},
+        // deleted_at: { type: DataTypes.DATE, allowNull: true},
         updated_at: { type: DataTypes.DATE, allowNull: true},
         createdAt: { type: DataTypes.DATE, allowNull: true},
-        updatedAt: { type: DataTypes.DATE, allowNull: true}
+        updatedAt: { type: DataTypes.DATE, allowNull: true},
+
+        // impact: { type: DataTypes.STRING, allowNull: true },
+        // total_format_weightage: { type: DataTypes.STRING, allowNull: true },
+        // tag_wtg: { type: DataTypes.STRING, allowNull: true },
+        // tonality_waitage: { type: DataTypes.STRING, allowNull: true },
+        // total_position_wtg: { type: DataTypes.STRING, allowNull: true },
+        // headline_wtg: { type: DataTypes.STRING, allowNull: true },
+        // page_type: { type: DataTypes.STRING, allowNull: true },
+        // super_theme: { type: DataTypes.STRING, allowNull: true },
     };
 
     const options = {};

@@ -32,7 +32,7 @@ const ViewUpload = () => {
       
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">View Upload Qualitative Report</h4>
-        <Table striped bordered hover size="sm">
+        <table className='table table-striped table-hover table-bordered'>
       <thead>
         <tr>
           <th>#</th>
@@ -57,7 +57,7 @@ const ViewUpload = () => {
         </tr>
        ))}
       </tbody>
-    </Table>
+    </table>
       </div>
     </div>
   </>

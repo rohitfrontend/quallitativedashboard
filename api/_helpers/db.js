@@ -33,6 +33,8 @@ async function initialize() {
     db.QaSpokesPerson = require('../artical/qa_spokesperson.model')(sequelize);
 
     db.QaUploadDetail = require('../artical/qa_upload_details.model')(sequelize);
+    db.Edition = require('../artical/edition.model')(sequelize);
+    db.QaSetting = require('../artical/qa_setting.model')(sequelize);
 
     
     // sync all models with database
