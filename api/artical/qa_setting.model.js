@@ -6,6 +6,7 @@ function model(sequelize) {
     const attributes = {
         client_id: { type: DataTypes.INTEGER, allowNull: false },
         graph_type:{ type: DataTypes.STRING, allowNull: false },
+        graph_id:{ type: DataTypes.INTEGER, allowNull: false },
         client_name:{ type: DataTypes.STRING, allowNull: false },
         entity_level: { type: DataTypes.BOOLEAN, allowNull: false },
         publication_level: { type: DataTypes.BOOLEAN, allowNull: false },

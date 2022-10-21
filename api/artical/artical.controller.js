@@ -125,7 +125,8 @@ exports.saveArtical = async function (req, res, next) {
                 spokesperson_level: e.spokesperson_level,
                 profiling_level: e.profiling_level,
                 visibility_level: e.visibility_level,
-                client_name: req.body.client_name
+                client_name: req.body.client_name,
+                graph_id: e.graph_id
             })
         })
     });

@@ -11,92 +11,39 @@ import { store } from '../../store/store';
 const graphType = [
   {
     label: 'Share of Voice',
-    value: 'Share of Voice',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 1,
   },
   {
     label: 'Thematic Analysis',
-    value: 'Thematic Analysis',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 2
   },
   {
     label: 'Geographical Spread',
-    value: 'Geographical Spread',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 3
   },
   {
     label: 'Journlist',
-    value: 'Journlist',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 4
   },
   {
     label: 'Spokesperson',
-    value: 'Spokesperson',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 5
   },
   {
     label: 'Sentiment',
-    value: 'Sentiment',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false
+    value: 6
   },
   {
     label: 'Keyword Analysis',
-    value: 'Keyword Analysis',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 7
   },
   {
     label: 'Publication',
-    value: 'Publication',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 8
   },
   {
     label: 'Visibility',
-    value: 'Visibility',
-    entity_level: false,
-    publication_level: false,
-    journlist_level: false,
-    city_level: false,
-    keyword_level: false,
-    checked: false
+    value: 9
   }
 
 ]
@@ -145,6 +92,7 @@ const Dashboard = () => {
     const [visibilityLevel, setVisibilityLevel] = useState(false)
     const [topicLevel, setTopicLevel] = useState(false)
     const [ip, setIP] = useState('');
+    const [graphTypeId, setGraphTypeId] = useState()
 
   //creating function to load ip address from the API
   const getData = async () => {
@@ -165,7 +113,7 @@ const Dashboard = () => {
       formData.append('year', year) 
       formData.append('username', state.auth.auth.first_name + ' '+  state.auth.auth.last_name);
       formData.append('email', state.auth.auth.email)
-      formData.append('ip_address', )
+      formData.append('ip_address', ip)
       formData.append('setting', JSON.stringify(setting))
         var config = {
             method: 'POST',
@@ -175,6 +123,7 @@ const Dashboard = () => {
         
         return axios(config).then((response) => {
           setGraphTypeName('');
+          setGraphTypeId('')
         emptyLevel()
         setSetting([])
                 setIsLoading(false)
@@ -209,7 +158,8 @@ const Dashboard = () => {
     }
 
     const setGraphTypeChange = (e) => {
-      setGraphTypeName(e.target.value)
+      setGraphTypeId(e.target.value)
+      setGraphTypeName(graphTypes[e.target.value].label)
       emptyLevel()
     }
 
@@ -224,12 +174,14 @@ const Dashboard = () => {
         spokesperson_level: spokespersonLevel,
         profiling_level: profilingLevel,
         visibility_level: visibilityLevel,
-        topic_level: topicLevel
+        topic_level: topicLevel,
+        graph_id: graphTypeId
       }
         let newSetting = [...setting];
         newSetting.push(currentSetting)
         setSetting(newSetting);
         setGraphTypeName('');
+        setGraphTypeId('')
         emptyLevel()
     }
     const deleteLevel = (index) => {

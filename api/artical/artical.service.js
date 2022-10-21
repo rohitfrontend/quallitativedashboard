@@ -169,7 +169,7 @@ async function getSetting(client_id) {
         "keyword_level",
         "spokesperson_level",
         "profiling_level",
-        "visibility_level", "topic_level", "client_name" ]
+        "visibility_level", "topic_level", "client_name", "graph_id" ]
       });
     return result;
 }
@@ -192,7 +192,7 @@ async function getSettingAll(client_id) {
         "keyword_level",
         "spokesperson_level",
         "profiling_level",
-        "visibility_level", "topic_level" , "client_name"]
+        "visibility_level", "topic_level" , "client_name", "graph_id"]
       });
     return result;
 }
