@@ -6,6 +6,7 @@ function model(sequelize) {
     const attributes = {
         client_id: { type: DataTypes.INTEGER, allowNull: false },
         graph_type:{ type: DataTypes.STRING, allowNull: false },
+        client_name:{ type: DataTypes.STRING, allowNull: false },
         entity_level: { type: DataTypes.BOOLEAN, allowNull: false },
         publication_level: { type: DataTypes.BOOLEAN, allowNull: false },
         journalist_level: { type: DataTypes.BOOLEAN, allowNull: false },
@@ -14,6 +15,7 @@ function model(sequelize) {
         spokesperson_level:{ type: DataTypes.BOOLEAN, allowNull: false },
         profiling_level: { type: DataTypes.BOOLEAN, allowNull: false },
         visibility_level:{ type: DataTypes.BOOLEAN, allowNull: false },
+        topic_level: { type: DataTypes.BOOLEAN, allowNull: false },
         created_by: { type: DataTypes.INTEGER, allowNull: true },
         last_modified_by: { type: DataTypes.INTEGER, allowNull: true },
         created_at: { type: DataTypes.DATE, allowNull: true},

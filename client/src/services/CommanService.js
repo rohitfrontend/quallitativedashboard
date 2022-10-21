@@ -11,3 +11,6 @@ export function post(url, data) {
 export function put(url, data) {
     return axiosInstance.put(url, data);
 }
+export function deleteMethod(url) {
+    return axiosInstance.delete(url);
+}

@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import Select from 'react-select'
+import swal from 'sweetalert';
 
 
 import axios from 'axios';
@@ -142,8 +143,16 @@ const Dashboard = () => {
     const [spokespersonLevel, setSpokespersonLevel] = useState(false);
     const [profilingLevel, setProfilingLevel] = useState(false);
     const [visibilityLevel, setVisibilityLevel] = useState(false)
+    const [topicLevel, setTopicLevel] = useState(false)
+    const [ip, setIP] = useState('');
+
+  //creating function to load ip address from the API
+  const getData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    console.log(res.data);
+    setIP(res.data.IPv4)
+  }
     const upload = async () => {
-      console.log('setting', setting)
       setIsLoading(true);
       setClientName();
       setClientId()
@@ -156,16 +165,20 @@ const Dashboard = () => {
       formData.append('year', year) 
       formData.append('username', state.auth.auth.first_name + ' '+  state.auth.auth.last_name);
       formData.append('email', state.auth.auth.email)
-      formData.append('ip_address', "ip_address")
+      formData.append('ip_address', )
       formData.append('setting', JSON.stringify(setting))
         var config = {
             method: 'POST',
-            url: 'http://localhost:4000/artical',
+            url: 'http://qa.conceptbiu.com/unifiedapi/artical',
             data: formData
           };
         
         return axios(config).then((response) => {
+          setGraphTypeName('');
+        emptyLevel()
+        setSetting([])
                 setIsLoading(false)
+                swal("Success!", "Upload document done", "success");
               })
               .catch(() => {
                 setIsLoading(false)
@@ -183,9 +196,7 @@ const Dashboard = () => {
       setClientName(e.label);
       setClientId(e.value)
     }
-
-    const setGraphTypeChange = (e) => {
-      setGraphTypeName(e.target.value)
+    const emptyLevel = () => {
       setCityLevel(false);
       setEntityLevel(false)
       setPublicationLevel(false)
@@ -194,6 +205,12 @@ const Dashboard = () => {
       setSpokespersonLevel(false)
       setProfilingLevel(false);
       setVisibilityLevel(false)
+      setTopicLevel(false)
+    }
+
+    const setGraphTypeChange = (e) => {
+      setGraphTypeName(e.target.value)
+      emptyLevel()
     }
 
     const addSetting = (e) =>  {
@@ -206,20 +223,14 @@ const Dashboard = () => {
         keyword_level: keywordLevel,
         spokesperson_level: spokespersonLevel,
         profiling_level: profilingLevel,
-        visibility_level: visibilityLevel
+        visibility_level: visibilityLevel,
+        topic_level: topicLevel
       }
         let newSetting = [...setting];
         newSetting.push(currentSetting)
         setSetting(newSetting);
         setGraphTypeName('');
-        setCityLevel(false);
-        setEntityLevel(false)
-        setPublicationLevel(false)
-        setjournalistLevel(false)
-        setKeywordLevel(false)
-        setSpokespersonLevel(false)
-      setProfilingLevel(false);
-      setVisibilityLevel(false)
+        emptyLevel()
     }
     const deleteLevel = (index) => {
       let newSetting = [...setting];
@@ -334,6 +345,12 @@ const Dashboard = () => {
               <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked5" checked={keywordLevel} onChange={e=> setKeywordLevel(e.target.checked)} />
               <label class="form-check-label" for="flexCheckChecked5">
                 Keyword Level
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked9" checked={topicLevel} onChange={e=> setTopicLevel(e.target.checked)} />
+              <label class="form-check-label" for="flexCheckChecked9">
+                Topic Level
               </label>
             </div>
             <div class="form-check">

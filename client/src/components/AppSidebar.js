@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { DashboardIcon, AnalysisIcon } from "../Icons/icons.component";
+import { DashboardIcon, AnalysisIcon, NotificationsMenuIcon } from "../Icons/icons.component";
 import { NavLink } from 'react-router-dom';
 
 import './sidebars.css'
@@ -22,16 +22,16 @@ const AppSidebar = () => {
         </NavLink>
       </li>
        <li>
-        <NavLink to="/view-upload" className="nav-link py-3 border-bottom" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+        <NavLink to="/view-upload" className="nav-link py-3 border-bottom" title="View Upload" data-bs-toggle="tooltip" data-bs-placement="right">
          <AnalysisIcon />
         </NavLink>
       </li>
-     {/* <li>
-        <a href="#" className="nav-link py-3 border-bottom" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg className="bi" width="24" height="24" role="img" aria-label="Orders"><use xlinkHref="#table"/></svg>
-        </a>
-      </li>
       <li>
+      <NavLink to="/view-setting" className="nav-link py-3 border-bottom" title="Setting" data-bs-toggle="tooltip" data-bs-placement="right">
+         <NotificationsMenuIcon />
+        </NavLink>
+      </li>
+     {/* <li>
         <a href="#" className="nav-link py-3 border-bottom" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
           <svg className="bi" width="24" height="24" role="img" aria-label="Products"><use xlinkHref="#grid"/></svg>
         </a>

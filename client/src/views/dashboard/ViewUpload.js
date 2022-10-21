@@ -26,10 +26,7 @@ const ViewUpload = () => {
       }, []);
     return (
         <>
-    
-
     <div class="row g-5">
-      
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">View Upload Qualitative Report</h4>
         <table className='table table-striped table-hover table-bordered'>
@@ -42,6 +39,8 @@ const ViewUpload = () => {
           <th>Month</th>
           <th>Year</th>
           <th>File</th>
+          <th>IP</th>
+          <th>Created Date</th>
         </tr>
       </thead>
       <tbody>
@@ -54,6 +53,8 @@ const ViewUpload = () => {
           <td>{list.month}</td>
           <td>{list.year}</td>
           <td><a href={list.file} target="_blank">{list.filename}</a></td>
+          <td>{list.ip_address}</td>
+          <td>{list.createdAt}</td>
         </tr>
        ))}
       </tbody>

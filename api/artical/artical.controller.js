@@ -60,42 +60,42 @@ exports.saveArtical = async function (req, res, next) {
     var f = req.body.upload; // <input type="file" id="upload" name="upload">
     var workbook = XLSX.readFile(f.path, { 'type': 'base64', cellDates: true, raw: true });
     var data = [];
-    // var sheetHeader;
-    // var sheet_name_list1 = workbook.SheetNames;
-    // let sheet_name_list = [];
-    // sheet_name_list.push(sheet_name_list1[0]);
-    // sheet_name_list.forEach(function (y) {
-    //     var worksheet = workbook.Sheets[y];
-    //     var a = {};
-    //     var headers = {};
-    //     // var data = [];
-    //     var result = [];
-    //     for (z in worksheet) {
-    //         if (z[0] === '!') continue;
-    //         //parse out the column, row, and value
-    //         var tt = 0;
-    //         for (var i = 0; i < z.length; i++) {
-    //             if (!isNaN(z[i])) {
-    //                 tt = i;
-    //                 break;
-    //             }
-    //         };
-    //         var col = z.substring(0, tt);
-    //         var row = parseInt(z.substring(tt));
-    //         var value = worksheet[z].v === 'Link' ? worksheet[z].l?.Target : worksheet[z].v;
-    //         //store header names
-    //         if (row == 1 && value) {
-    //             headers[col] = value.toLowerCase();
-    //             sheetHeader = headers;
-    //             continue;
-    //         }
+    var sheetHeader;
+    var sheet_name_list1 = workbook.SheetNames;
+    let sheet_name_list = [];
+    sheet_name_list.push(sheet_name_list1[0]);
+    sheet_name_list.forEach(function (y) {
+        var worksheet = workbook.Sheets[y];
+        var a = {};
+        var headers = {};
+        // var data = [];
+        var result = [];
+        for (z in worksheet) {
+            if (z[0] === '!') continue;
+            //parse out the column, row, and value
+            var tt = 0;
+            for (var i = 0; i < z.length; i++) {
+                if (!isNaN(z[i])) {
+                    tt = i;
+                    break;
+                }
+            };
+            var col = z.substring(0, tt);
+            var row = parseInt(z.substring(tt));
+            var value = worksheet[z].v === 'Link' ? worksheet[z].l?.Target : worksheet[z].v;
+            //store header names
+            if (row == 1 && value) {
+                headers[col] = value.toLowerCase();
+                sheetHeader = headers;
+                continue;
+            }
 
-    //         if (!data[row]) data[row] = {};
-    //         data[row][headers[col]] = value;
-    //     }
-    //     data.shift();
-    //     data.shift();
-    // });
+            if (!data[row]) data[row] = {};
+            data[row][headers[col]] = value;
+        }
+        data.shift();
+        data.shift();
+    });
 
     const addUploadDetails = new Promise((resolve, reject) => {
         articalService.addUploadDetails({
@@ -124,7 +124,8 @@ exports.saveArtical = async function (req, res, next) {
                 graph_type: e.graph_type,
                 spokesperson_level: e.spokesperson_level,
                 profiling_level: e.profiling_level,
-                visibility_level: e.visibility_level
+                visibility_level: e.visibility_level,
+                client_name: req.body.client_name
             })
         })
     });
@@ -365,18 +366,34 @@ exports.getSetting = async function(req, res, next) {
    .catch(next);
 }
 
-exports.getSetting = async function(req, res, next) {
-    articalService.getSetting(req.params.client_id)
+exports.getQualitativeCheck = async function(req, res, next) {
+    articalService.getQualitativeCheck(req.params.client_id)
+   .then(data => {
+       res.json({qualitative: data > 0 ? true : false , message: "Client Qualitative fetched successfully"});
+   })
+   .catch(next);
+}
+
+exports.getSettingAll = async function(req, res, next) {
+    articalService.getSettingAll()
    .then(data => {
        res.json({settings: data, message: "Client setting fetched successfully"});
    })
    .catch(next);
 }
 
-exports.getQualitativeCheck = async function(req, res, next) {
-    articalService.getQualitativeCheck(req.params.client_id)
+exports.updateSetting = async function(req, res, next) {
+    articalService.updateSetting(req.params.id, req.body)
    .then(data => {
-       res.json({qualitative: data > 0 ? true : false , message: "Client Qualitative fetched successfully"});
+       res.json({settings: {}, message: "Client setting updated successfully"});
+   })
+   .catch(next);
+}
+
+exports.deleteSetting = async function(req, res, next) {
+    articalService.deleteSetting(req.params.id)
+   .then(data => {
+       res.json({settings: {}, message: "Client setting deleted successfully"});
    })
    .catch(next);
 }

@@ -21,7 +21,10 @@ module.exports = {
     addQaData,
     getSetting,
     addSetting,
-    getQualitativeCheck
+    getQualitativeCheck,
+    getSettingAll,
+    deleteSetting,
+    updateSetting
 };
 
 
@@ -166,7 +169,7 @@ async function getSetting(client_id) {
         "keyword_level",
         "spokesperson_level",
         "profiling_level",
-        "visibility_level" ]
+        "visibility_level", "topic_level", "client_name" ]
       });
     return result;
 }
@@ -175,4 +178,28 @@ async function getQualitativeCheck(client_id) {
         where: { client_id: client_id }
       });
     return count;
+}
+
+async function getSettingAll(client_id) {
+    const result = await db.QaSetting.findAll({
+        attributes: ["id",
+        "client_id",
+        "graph_type",
+        "entity_level",
+        "publication_level",
+        "journalist_level",
+        "city_level",
+        "keyword_level",
+        "spokesperson_level",
+        "profiling_level",
+        "visibility_level", "topic_level" , "client_name"]
+      });
+    return result;
+}
+
+async function updateSetting(id, data) {
+    await db.QaSetting.update(data, { where: { id: id } });
+}
+async function deleteSetting(id) {
+    await db.QaSetting.destroy({ where: { id: id } });
 }
