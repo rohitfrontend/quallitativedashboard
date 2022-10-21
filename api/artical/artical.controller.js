@@ -359,9 +359,10 @@ exports.addSetting = async function(req, res, next) {
 }
 
 exports.getSetting = async function(req, res, next) {
+    const check = articalService.getQualitativeCheck(req.params.client_id)
     articalService.getSetting(req.params.client_id)
    .then(data => {
-       res.json({settings: data, message: "Client setting fetched successfully"});
+       res.json({settings: data, qualitative: check > 0 ? true : false, message: "Client setting fetched successfully"});
    })
    .catch(next);
 }
