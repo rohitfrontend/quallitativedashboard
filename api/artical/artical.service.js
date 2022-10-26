@@ -24,7 +24,9 @@ module.exports = {
     getQualitativeCheck,
     getSettingAll,
     deleteSetting,
-    updateSetting
+    updateSetting,
+    addVerticalSetting,
+    getVerticalSetting
 };
 
 
@@ -156,6 +158,22 @@ async function addSetting(params) {
     return created;
 }
 
+async function addVerticalSetting(params) {
+    const [row, created] = await db.QaVerticalSetting.findOrCreate({ where: { client_id: params.client_id  }, defaults: params });
+    if(created === true){
+        await db.QaVerticalSetting.update(params, { where: { id: row.id } });
+    }
+    return created;
+}
+
+async function getVerticalSetting(client_id) {
+    const result = await db.QaVerticalSetting.findOne({
+        where: { client_id: client_id },
+        attributes: ["id",
+         "verticals", "isVertical" ]
+      });
+    return result;
+}
 async function getSetting(client_id) {
     const result = await db.QaSetting.findAll({
         where: { client_id: client_id },
@@ -169,7 +187,7 @@ async function getSetting(client_id) {
         "keyword_level",
         "spokesperson_level",
         "profiling_level",
-        "visibility_level", "topic_level", "client_name", "graph_id" ]
+        "visibility_level", "topic_level", "client_name", "graph_id"]
       });
     return result;
 }

@@ -22,7 +22,7 @@ const graphType = [
     value: 3
   },
   {
-    label: 'Journlist',
+    label: 'Journalist',
     value: 4
   },
   {
@@ -158,8 +158,9 @@ const Dashboard = () => {
     }
 
     const setGraphTypeChange = (e) => {
+      console.log('graphTypes[e.target.value]', graphTypes[e.target.value - 1])
       setGraphTypeId(e.target.value)
-      setGraphTypeName(graphTypes[e.target.value].label)
+      setGraphTypeName(graphTypes[e.target.value - 1].label)
       emptyLevel()
     }
 
@@ -260,7 +261,7 @@ const Dashboard = () => {
               <select class="form-select" id="state"  onChange={e => setGraphTypeChange(e)} required>
                 <option value="">Choose...</option>
                 {graphTypes?.map((e) => (
-                  <option disabled={setting.filter(s => s.graph_type === e.value).length === 1} value={e.value}>{e.label}</option>
+                  <option disabled={setting.filter(s => s.graph_type === e.label).length === 1} value={e.value}>{e.label}</option>
                  ))}
               </select>
              
@@ -284,7 +285,7 @@ const Dashboard = () => {
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked={journalistLevel} onChange={e=> setjournalistLevel(e.target.checked)} />
               <label class="form-check-label" for="flexCheckDefault3">
-                Journlist Level
+                Journalist Level
               </label>
             </div>
             <div class="form-check">
@@ -340,7 +341,7 @@ const Dashboard = () => {
     {/* <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
     {e.entity_level === true && <p class="card-text">Entity Level :  Yes</p> }
     {e.publication_level === true && <p class="card-text">Publication Level : Yes</p> }
-    {e.journlist_level === true && <p class="card-text">Journlist Level :  Yes</p>}
+    {e.journlist_level === true && <p class="card-text">Journalist Level :  Yes</p>}
     {e.city_level === true && <p class="card-text">City Level : Yes</p>}
     {e.keyword_level === true && <p class="card-text">Keyword Level :  Yes</p>}
     {e.spokesperson_level === true && <p class="card-text">Spokesperson Level :  Yes</p>}
@@ -352,6 +353,35 @@ const Dashboard = () => {
   ))}
 
 </div></div>
+
+<div class="col-12">
+              <label for="vertical" class="form-label">Vertical</label>
+              <select class="form-select" id="vertical"  onChange={e => setVertical(e)} required>
+                <option value="">Choose...</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+             
+            </div>
+            {graphTypeName && (
+            <div class="container ">
+  <div class="row">
+            <div class="col-9">
+            
+            <div class="form-input">
+              <input class="form-input" type="text" value="" id="flexCheckCheckedvertical" checked={visibilityLevel} onChange={e=> setVisibilityLevel(e.target.checked)} />
+              <label class="form-label" for="flexCheckCheckedvertical">
+              Visibility Level
+              </label>
+            </div>
+              
+            </div>
+            <div class="col-3">
+            <button class="btn btn-primary" onClick={e => addSetting()}  type="button" >ADD Vertical</button>
+            </div>
+            </div>
+            </div>
+             )}
             <div class="col-md-3">
               <label for="zip" class="form-label">Document</label>
               <input type="file" class="form-control" id="zip" onChange={onFileChange} placeholder="" required />

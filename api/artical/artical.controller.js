@@ -126,12 +126,23 @@ exports.saveArtical = async function (req, res, next) {
                 profiling_level: e.profiling_level,
                 visibility_level: e.visibility_level,
                 client_name: req.body.client_name,
-                graph_id: e.graph_id
+                graph_id: e.graph_id,
+                isVertical: e.is_vertical,
+                verticals: e.verticals
             })
         })
     });
 
-    Promise.all([addUploadDetails, addSetting, data.map(async (e, index) => {
+    const addVertical = new Promise((resolve, reject) => {
+        articalService.addVerticalSetting({
+            isVertical: req.body.is_vertical,
+            verticals: req.body.verticals,
+            client_id: req.body.client_id,
+            client_name: req.body.client_name
+        })
+    });
+
+    Promise.all([addUploadDetails, addSetting, addVertical, data.map(async (e, index) => {
         const art = parseInt(e['article id']);
         if (art !== 0 && !isNaN(art)) {
 
@@ -364,7 +375,11 @@ exports.getSetting = async function (req, res, next) {
         .then(check => {
             articalService.getSetting(req.params.client_id)
                 .then(data => {
-                    res.json({ settings: data, qualitative: check > 0 ? true : false, message: "Client setting fetched successfully" });
+                    articalService.getVerticalSetting(req.params.client_id)
+                        .then(vertical => {
+                            res.json({ settings: data, qualitative: check > 0 ? true : false, isVertical: vertical ? vertical?.isVertical : false,verticals: vertical ? JSON.parse(vertical?.verticals) : [], message: "Client setting fetched successfully" });
+                        })
+                        .catch(next);
                 })
                 .catch(next);
         })

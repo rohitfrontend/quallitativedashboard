@@ -35,6 +35,7 @@ async function initialize() {
     db.QaUploadDetail = require('../artical/qa_upload_details.model')(sequelize);
     db.Edition = require('../artical/edition.model')(sequelize);
     db.QaSetting = require('../artical/qa_setting.model')(sequelize);
+    db.QaVerticalSetting = require('../artical/qa_vertical_setting.model')(sequelize);
 
     
     // sync all models with database
