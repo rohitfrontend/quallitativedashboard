@@ -7,6 +7,8 @@ function model(sequelize) {
         client_id: { type: DataTypes.INTEGER, allowNull: false },
         client_name:{ type: DataTypes.STRING, allowNull: false },
         isVertical: { type: DataTypes.BOOLEAN, allowNull: false },
+        isReach: { type: DataTypes.BOOLEAN, allowNull: false },
+        isIndex: { type: DataTypes.BOOLEAN, allowNull: false },
         verticals: {
             type: DataTypes.TEXT,
             allowNull: false,
