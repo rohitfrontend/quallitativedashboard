@@ -96,20 +96,32 @@ exports.saveArtical = async function (req, res, next) {
         data.shift();
         data.shift();
     });
-
+    
     const addUploadDetails = new Promise((resolve, reject) => {
-        articalService.addUploadDetails({
-            username: req.body.username,
-            email: req.body.email,
-            client_id: req.body.client_id,
-            client_name: req.body.client_name,
-            month: req.body.month,
-            year: req.body.year,
-            ip_address: req.body.ip_address,
-            file: f.url,
-            filename: f.filename,
-            originalname: f.originalname
-        })
+        if(req.body.isIndex === 'true') {
+            data.filter(e => e.index).length === 0 ? reject('Your sheet not proper index values. Please check') : resolve()
+        }else if(req.body.isReach === 'true') {
+            data.filter(e => e["cir ('000) & web wtg"]).length === 0 ? reject('Your sheet not proper reach values. Please check') : resolve()
+        }else {
+            
+            const artlength = data.filter(e => e['article id']);
+            if(artlength.length === 0){
+                reject('Your sheet not proper article values. Please check')
+            }else {
+                articalService.addUploadDetails({
+                    username: req.body.username,
+                    email: req.body.email,
+                    client_id: req.body.client_id,
+                    client_name: req.body.client_name,
+                    month: req.body.month,
+                    year: req.body.year,
+                    ip_address: req.body.ip_address,
+                    file: f.url,
+                    filename: f.filename,
+                    originalname: f.originalname
+                })
+            }  
+        }
     });
 
     const addSetting = new Promise((resolve, reject) => {
@@ -121,6 +133,7 @@ exports.saveArtical = async function (req, res, next) {
                 journalist_level: e.journalist_level,
                 city_level: e.city_level,
                 keyword_level: e.keyword_level,
+                topic_level: e.topic_level,
                 graph_type: e.graph_type,
                 spokesperson_level: e.spokesperson_level,
                 profiling_level: e.profiling_level,
@@ -131,7 +144,18 @@ exports.saveArtical = async function (req, res, next) {
         })
     });
 
-    Promise.all([addUploadDetails, addSetting, data.map(async (e, index) => {
+    const addVertical = new Promise((resolve, reject) => {
+        articalService.addVerticalSetting({
+            isVertical: req.body.is_vertical,
+            verticals: req.body.verticals,
+            client_id: req.body.client_id,
+            client_name: req.body.client_name,
+            isIndex: req.body.isIndex,
+            isReach: req.body.isReach
+        })
+    });
+    
+    Promise.all([addUploadDetails, addSetting, addVertical, data.map(async (e, index) => {
         const art = parseInt(e['article id']);
         if (art !== 0 && !isNaN(art)) {
 
@@ -226,7 +250,6 @@ exports.saveArtical = async function (req, res, next) {
                 // console.log('qa_data', qa_data)
                 await articalService.createQaData(qa_data).then(async (q_articles) => {
                     // const [q_articles, created] = q_articles;
-                    console.log('created', q_articles)
                     // if(created === false) {
                     //     await articalService.updateQaData(qa_data, q_articles)
                     // }
@@ -275,8 +298,11 @@ exports.saveArtical = async function (req, res, next) {
         }
 
     })]).then((values) => {
-        console.log('values', values); // [3, 1337, "foo"]
-    });
+        console.log('values', values)
+        // res.json({ message: 'Artical upload processing', data: {} });
+    }).catch((error)=> {
+        res.json({ message: error, data: {} });
+    })
 
     res.json({ message: 'Artical upload processing', data: {} });
 }
@@ -364,7 +390,11 @@ exports.getSetting = async function (req, res, next) {
         .then(check => {
             articalService.getSetting(req.params.client_id)
                 .then(data => {
-                    res.json({ settings: data, qualitative: check > 0 ? true : false, message: "Client setting fetched successfully" });
+                    articalService.getVerticalSetting(req.params.client_id)
+                        .then(vertical => {
+                            res.json({ settings: data, qualitative: check > 0 ? true : false, isVertical: vertical ? vertical?.isVertical : false,verticals: vertical ? JSON.parse(vertical?.verticals) : [], message: "Client setting fetched successfully" });
+                        })
+                        .catch(next);
                 })
                 .catch(next);
         })

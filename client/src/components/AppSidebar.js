@@ -20,7 +20,7 @@ const AppSidebar = () => {
       <li className="nav-item">
         <NavLink to="/dashboard" className="nav-link " aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
           <span className='menuIcon'><DashboardIcon /></span>
-          <span className='menuTitle'>Dashboard</span>
+          <span className='menuTitle'>Upload</span>
         </NavLink>
       </li>
        <li>
