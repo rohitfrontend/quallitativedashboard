@@ -137,7 +137,7 @@ const Dashboard = () => {
     formData.append('isReach', isReach)
     var config = {
       method: 'POST',
-      url: 'http://localhost:4000/artical',
+      url: 'http://qa.conceptbiu.com/unifiedapi/artical',
       data: formData,
       onUploadProgress: data => {
         //Set the progress value to show the progress bar
@@ -152,7 +152,7 @@ const Dashboard = () => {
     xhr.addEventListener("load", SuccessHandler, false);
     xhr.addEventListener("error", ErrorHandler, false);
     xhr.addEventListener("abort", AbortHandler, false);
-    xhr.open("POST", "http://localhost:4000/artical");
+    xhr.open("POST", "http://qa.conceptbiu.com/unifiedapi/artical");
     xhr.send(formData);
 
     // return axios(config).then((response) => {
