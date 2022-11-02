@@ -1,0 +1,201 @@
+.appContainer{
+    width: calc(100% - 72px);
+    float: right;
+ 
+}
+.uqr-contents{    padding: 12px 0px;
+    background: white;
+    margin: 0 35px;
+    box-shadow: 0 4px 30px -8px rgb(125 112 188 / 30%);
+    border-left: 1px solid rgba(106,75,255,.1);
+    position: relative;
+    top: 80px;
+}
+
+.view-setting{
+    margin: 25px 20px 0 35px;
+    background-color: #fff;
+    margin-top: 80px;
+}
+
+.graph-options{
+    background-color: rgb(234, 234, 234);
+    margin: 10px;
+    padding: 15px;
+   
+}
+.css-1s2u09g-control{
+    height: 36px;
+    border: 1px solid rgba(106,75,255,.2);
+    border-color: rgba(106,75,255,.2) !important;
+    background-color: #fff;
+    color: #0036b9 !important;
+    font-size: 12px;
+    font-family: 'Manrope', sans-serif;
+}
+.heading span{color: #dc0000;}
+.heading {color: #0036b9;}
+.css-1s2u09g-control input{color: #0036b9 !important;}
+.form-select{
+    height: 36px;
+    box-shadow: 0 4px 24px -8px rgb(125 112 188 / 20%);
+    border: 1px solid rgba(106,75,255,.2);
+    background-color: #fff;
+    color: #0036b9;
+    font-size: 12px;
+    font-family: 'Manrope', sans-serif
+}
+.form-select:focus{
+    height: 36px;
+    box-shadow: 0 4px 24px -8px rgb(125 112 188 / 20%);
+    border: 1px solid rgba(106,75,255,.2);
+    background-color: #fff;
+    color: #0036b9;
+}
+.form-control{
+    height: 36px;
+    box-shadow: 0 4px 24px -8px rgb(125 112 188 / 20%);
+    border: 1px solid rgba(106,75,255,.2);
+    background-color: #fff;
+    color: #0036b9;
+}
+.form-control:focus{
+    height: 36px;
+    box-shadow: 0 4px 24px -8px rgb(125 112 188 / 20%);
+    border: 1px solid rgba(106,75,255,.2);
+    background-color: #fff;
+    color: #0036b9;
+}
+form.needs-validation label{
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+}
+
+.css-319lph-ValueContainer{
+    height: 36px;
+    box-shadow: 0 4px 24px -8px rgb(125 112 188 / 20%);
+    background-color: #fff;
+    color: #0036b9;
+
+}
+.leftNavigationMenu li a .menuIcon {
+    width: 20px;
+    border-radius: 50%;
+
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex: 0 0 40px;
+    flex: 0 0 40px;
+}
+.nav-pills .nav-link{
+    text-align: left;
+    background-color: transparent;
+    display: flex;
+}
+.menuTitle{display: none;}
+.leftNavigationWrap:hover span.menuTitle{
+    display: block;
+    color: #393939;
+    margin: 8px;
+    font-weight: normal;
+}
+.leftNavigationWrap li{
+    margin: 5px 0;
+}
+.leftNavigationWrap a.active span.menuTitle{
+    color: #fff;
+}
+.leftNavigationWrap:hover .nav-link.active{
+    color: #fff;
+    background-color: #0036b9;
+    padding: 0;
+    width: 100%;
+
+    
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{background-color: transparent;     }
+
+.leftNavigationWrap a.active span.menuIcon{
+    background-color: #0036b9 !important;
+    width: 40px;
+    height: 40px;
+    fill: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.leftNavigationWrap li:hover .menuIcon{    background-color: #0036b9;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+
+.leftNavigationWrap:hover li:hover span.menuIcon{
+    background-color: #0036b9 !important;
+    width: 40px;
+    height: 40px;
+    fill: #fff;
+    text-align: center;
+    border-radius: 50%;
+}
+.btn-primary{background-color: #0036b9;}
+.nav-flush .nav-link{
+    padding: 0;
+}
+.view-setting table th{
+    color: #938fa9;
+    font-weight: 400;
+    border: none;
+    padding: 16px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+.view-setting table td{
+    padding: 14px;
+}
+.table>:not(:first-child){
+    border-top:1px solid #d7d7d7;
+}
+.page-title{background-color: #fff;      padding: 15px 40px 8px; position: fixed;
+    z-index: 9;
+    top:0;
+    width: 100%;}
+svg.DeleteIcon{fill: #dc0000;}
+a.DeleteIcon{color: #dc0000;}
+.page-title h1{font-size: 24px; }
+.main-logo{padding: 13px;}
+.main-logo img{width: 57px;}
+.menuIcon{margin-left: 22px;}
+.leftNavigationWrap span.menuIcon{
+    background-color: #fff !important;
+    width: 40px;
+    height: 40px;
+    fill: #0036b9;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.leftNavigationWrap:hover sapn.menu-Icon{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+.leftNavigationWrap:hover li:hover a svg{
+    fill: #fff;
+}
+ul.nav-pills li a svg{
+    fill: #0036b9; 
+}
+ul.nav-pills li a.active svg{
+    fill: #ffffff; 
+}
+.leftNavigationWrap:hover{width: 250px !important;}

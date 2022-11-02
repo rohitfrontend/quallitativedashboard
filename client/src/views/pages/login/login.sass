@@ -1,5 +1,5 @@
 @import '../../../variables'
-
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap')
 .loginPage
   background: url("../../../assets/images/signinBg.svg") $white
   background-position: left top
@@ -13,20 +13,31 @@
     align-items: center
     justify-content: center
 .loginSection
-  width: 92%
+  background-color: #fff
   display: flex
+  height:100vh
+  background-repeat: no-repeat
+  background-position: 0 0
+  background: url(https://clientportal.conceptbiu.com/static/media/signinBg.b88b9883.svg) no-repeat #fff
+  background-size: 50% 100%
+  h1
+    font-family: 'Manrope', sans-serif
+    font-size: 35px
+    font-weight: 800
   align-items: center
   .loginLeftImage
     width: 58%
     padding-left: 2%
-    padding: 121px 64px 75px
+    padding: 100px 64px 75px
     img
       width: 665px
       max-width: 100%
+  h3.heading
+    color: #0036b9
   .loginCard
     width: 320px
     margin-left: auto
-    margin-right: 8%
+    margin-right: 12%
     .logoWrap
       display: flex
       justify-content: center
@@ -68,7 +79,8 @@
         width: 100%
         font-size: 16px
         padding: 12px 16px
-        font-family: $manropeBold
+      .btn:hover
+        color: #fff
       .oldportalSignin
         font-size: 14px
         margin-top: 10px
@@ -97,7 +109,14 @@
       padding-right: 18%
       img
         width: auto
-
+.btnBlue
+  background-color: #0036b9
+  color: #fff
+.logoWrap img
+  width: 100px
+loginWrap
+    background-color: #fff
+    height: 100%
 @media screen and ( max-width: 1199px )
   .loginSection
     .loginCard

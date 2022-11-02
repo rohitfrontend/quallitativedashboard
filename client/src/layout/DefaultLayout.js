@@ -1,10 +1,10 @@
 import React from 'react'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { AppContent, AppSidebar, AppFooter, } from '../components/index'
 
 const DefaultLayout = () => {
   return (
-    <><AppHeader />
-           <main className="">
+    // <><AppHeader />
+           <div className="">
 
     {/* <div className="container-fluid">
   <div className="row"> */}
@@ -13,8 +13,8 @@ const DefaultLayout = () => {
   <AppContent />
   {/* </div>
   </div> */}
-  </main>
-    </>
+  </div>
+    // </>
    
     // <div>
     //   <AppSidebar />

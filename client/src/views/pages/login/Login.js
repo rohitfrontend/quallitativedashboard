@@ -127,14 +127,13 @@ const Login = ({ history }) => {
         </div>
         <div className="loginCard">
           <div className="logoWrap">
-            <span>
+      
               <img
                 src={ConceptLogo}
                 alt="Concept BIU"
-                width="105"
-                height="105"
+                
               />
-            </span>
+         
             {/* <span>
               <img
                 src={journolistLogo}
@@ -144,7 +143,8 @@ const Login = ({ history }) => {
               />
             </span> */}
           </div>
-          <h1 className="heading">Sign in</h1>
+          <h3 className="heading"><span>Qualitative</span> Dashboard</h3>
+          <h5>Sign in</h5>
           <p className="infoText">Please enter your credentials to proceed.</p>
           <form onSubmit={handleLogin}>
             <div className="form-group email">

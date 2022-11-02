@@ -3,11 +3,11 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 // routes config
 import routes from '../routes'
-
+import '../components/main.css'
 const AppContent = () => {
   return (
-    <div className="container-fluid " >
-    <div className="row">
+    <div className="appContainer" >
+    <div className="uqr-form">
       <Suspense >
         <Routes>
           {routes.map((route, idx) => {

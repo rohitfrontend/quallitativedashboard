@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 
 import axios from 'axios';
 import { get , post } from "../../services/CommanService";
+import AppHeader from '../../components/AppHeader';
 
 const ViewUpload = () => {
   
@@ -26,10 +27,15 @@ const ViewUpload = () => {
       }, []);
     return (
         <>
-    <div class="row g-5">
-      <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">View Upload Qualitative Report</h4>
-        <table className='table table-striped table-hover table-bordered'>
+        <div className="page-title">
+            <h1 >
+              View Upload
+            </h1>
+            </div>
+    <div class="">
+      <div class="view-setting">
+        
+        <table className='table'>
       <thead>
         <tr>
           <th>#</th>

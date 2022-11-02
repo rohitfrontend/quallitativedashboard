@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { EditIcon, DeleteIcon } from "../../Icons/icons.component";
 import swal from 'sweetalert';
-
+import AppHeader from '../../components/AppHeader';
 import axios from 'axios'; 
 import { get , post, put, deleteMethod } from "../../services/CommanService";
 import { pureFinalPropsSelectorFactory } from 'react-redux/es/connect/selectorFactory';
@@ -71,11 +71,15 @@ const [editMode, setEditMode] = useState(false)
         <>
     
 
-    <div class="row g-5">
-      
-      <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">View Setting</h4>
-        <table className='table table-striped table-hover table-bordered'>
+
+    <div className="page-title">
+            <h1 >
+              View Setting
+            </h1>
+            </div>
+      <div class="view-setting">
+        
+        <table className='table'>
       <thead>
         <tr>
           <th>#</th>
@@ -109,13 +113,13 @@ const [editMode, setEditMode] = useState(false)
           <td>{list.spokesperson_level === true ? 'Yes' : 'No'}</td>
           <td>{list.profiling_level === true ? 'Yes' : 'No'}</td>
           <td>{list.visibility_level === true ? 'Yes' : 'No'}</td>
-            <td ><a onClick={e=> editOpen(list)} href="javascript:void(0)"><EditIcon  /></a> <a href="javascript:void(0);" onClick={e => deleteSetting(list.id)}><DeleteIcon /></a></td>
+            <td ><a onClick={e=> editOpen(list)} href="javascript:void(0)"><EditIcon  /></a> <a href="javascript:void(0);" onClick={e => deleteSetting(list.id)} className='deleicon'><DeleteIcon /></a></td>
         </tr>
        ))}
       </tbody>
     </table>
       </div>
-    </div>
+
 
     <Modal show={show} onHide={handleClose}>
     {editMode && (

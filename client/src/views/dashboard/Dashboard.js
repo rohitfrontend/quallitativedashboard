@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import Select from 'react-select'
 import swal from 'sweetalert';
-
+import AppHeader from '../../components/AppHeader';
 
 import axios from 'axios';
 import { get , post } from "../../services/CommanService";
@@ -199,15 +199,16 @@ const Dashboard = () => {
     {isLoading && 
     <div id="cover-spin"></div>
 }
-    <div class="row g-5">
+<AppHeader/>
+    <div class="uqr-contents">
       
-      <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Upload Qualitative Report</h4>
+      <div class="container-fluid">
         <form class="needs-validation"  novalidate>
           <div class="row g-3">
             
-
+        
           <div class="col-12">
+            <div className='client-section'>
               <label for="country" class="form-label">Client</label>
               {/* <select class="form-select" onChange={e => setClientId(e.target.value)} id="country" required>
                 <option value="">Choose...</option>
@@ -224,8 +225,8 @@ const Dashboard = () => {
                 Please select a valid country.
               </div> */}
             </div>
-
-            <div class="col-12">
+            </div>
+            <div class="col-6">
               <label for="state" class="form-label">Month</label>
               <select class="form-select" id="state"  onChange={e => setMonth(e.target.value)} required>
                 <option value="">Choose...</option>
@@ -244,7 +245,7 @@ const Dashboard = () => {
               </select>
               
             </div> 
-            <div class="col-12">
+            <div class="col-6">
               <label for="state" class="form-label">Year</label>
               <select class="form-select" id="state"  onChange={e => setYear(e.target.value)} required>
                 <option value="">Choose...</option>
@@ -266,9 +267,8 @@ const Dashboard = () => {
              
             </div>
             {graphTypeName && (
-            <div class="container ">
-  <div class="row">
-            <div class="col-9">
+            <div class="container graph-options">
+            <div class="col-12">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked={entityLevel} onChange={e=> setEntityLevel(e.target.checked)} />
               <label class="form-check-label" for="flexCheckDefault1">
@@ -325,14 +325,13 @@ const Dashboard = () => {
             </div>
               
             </div>
-            <div class="col-3">
+            <div class="col-12 ">
             <button class="btn btn-primary" onClick={e => addSetting()}  type="button" >ADD GRAPH TYPE</button>
             </div>
-            </div>
+
             </div>
              )}
             <div class="container ">
-  <div class="row">
   {setting?.map((e, index) => (
             <div class="card" key={index} style={{ width: "18rem"}}>
   <div class="card-body">
@@ -351,8 +350,8 @@ const Dashboard = () => {
 </div>
   ))}
 
-</div></div>
-            <div class="col-md-3">
+</div>
+            <div class="col-md-12">
               <label for="zip" class="form-label">Document</label>
               <input type="file" class="form-control" id="zip" onChange={onFileChange} placeholder="" required />
               {/* <div class="invalid-feedback">
@@ -365,6 +364,9 @@ const Dashboard = () => {
 <br></br>
 
           <button class="btn btn-primary btn-medium"  type="reset" onClick={e => upload()}>Upload</button>
+          <br></br>
+          <br></br>
+          
         </form>
       </div>
     </div>

@@ -10,34 +10,38 @@ const AppSidebar = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   return (
-    <div className="d-flex flex-column flex-shrink-0 bg-light" style={{width: "4.5rem" }}>
-    <a href="/" className="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
-      <svg className="bi" width="40" height="32"><use xlinkHref="#bootstrap"/></svg>
-      <span className="visually-hidden">Icon-only</span>
+    <div className="d-flex flex-column flex-shrink-0 bg-light leftNavigationWrap" style={{width: "5.3rem" }}>
+    <a href="/" className="d-block main-logo link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
+      {/* <svg className="bi" width="40" height="32"><use xlinkHref="#bootstrap"/></svg>
+      <span className="visually-hidden">Icon-only</span> */}
+      <img src='https://www.conceptbiu.com/images/logo.svg'></img>
     </a>
     <ul className="nav nav-pills nav-flush flex-column mb-auto text-center">
       <li className="nav-item">
-        <NavLink to="/dashboard" className="nav-link  py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-          <DashboardIcon />
+        <NavLink to="/dashboard" className="nav-link " aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+          <span className='menuIcon'><DashboardIcon /></span>
+          <span className='menuTitle'>Dashboard</span>
         </NavLink>
       </li>
        <li>
-        <NavLink to="/view-upload" className="nav-link py-3 border-bottom" title="View Upload" data-bs-toggle="tooltip" data-bs-placement="right">
-         <AnalysisIcon />
+        <NavLink to="/view-upload" className="nav-link" title="View Upload" data-bs-toggle="tooltip" data-bs-placement="right">
+        <span className='menuIcon'><AnalysisIcon /></span>
+        <span className='menuTitle'>View Upload</span>
         </NavLink>
       </li>
       <li>
-      <NavLink to="/view-setting" className="nav-link py-3 border-bottom" title="Setting" data-bs-toggle="tooltip" data-bs-placement="right">
-         <NotificationsMenuIcon />
+      <NavLink to="/view-setting" className="nav-link" title="Setting" data-bs-toggle="tooltip" data-bs-placement="right">
+         <span className='menuIcon'><NotificationsMenuIcon /></span>
+         <span className='menuTitle'>View Setting</span>
         </NavLink>
       </li>
      {/* <li>
-        <a href="#" className="nav-link py-3 border-bottom" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a href="#" className="nav-link py-3 " title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
           <svg className="bi" width="24" height="24" role="img" aria-label="Products"><use xlinkHref="#grid"/></svg>
         </a>
       </li>
       <li>
-        <a href="#" className="nav-link py-3 border-bottom" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a href="#" className="nav-link py-3 " title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
           <svg className="bi" width="24" height="24" role="img" aria-label="Customers"><use xlinkHref="#people-circle"/></svg>
         </a>
       </li> */}

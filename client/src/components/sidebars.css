@@ -90,3 +90,17 @@ svg.icon.DashboardIcon {
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
+
+
+
+.leftNavigationWrap {
+    width: 240px;
+    background: rgb(255, 255, 255) !important;
+    position: fixed;
+    border-right: 1px solid #f2efff;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 12;
+}
