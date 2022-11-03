@@ -299,12 +299,12 @@ exports.saveArtical = async function (req, res, next) {
 
     })]).then((values) => {
         console.log('values', values)
-        // res.json({ message: 'Artical upload processing', data: {} });
+        res.json({ message: 'Artical upload processing', data: {} });
     }).catch((error)=> {
         res.json({ message: error, data: {} });
     })
 
-    res.json({ message: 'Artical upload processing', data: {} });
+    // res.json({ message: 'Artical upload processing', data: {} });
 }
 
 
