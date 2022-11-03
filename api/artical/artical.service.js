@@ -170,7 +170,7 @@ async function getVerticalSetting(client_id) {
     const result = await db.QaVerticalSetting.findOne({
         where: { client_id: client_id },
         attributes: ["id",
-         "verticals", "isVertical" ]
+         "verticals", "isVertical", "isIndex", "isReach" ]
       });
     return result;
 }

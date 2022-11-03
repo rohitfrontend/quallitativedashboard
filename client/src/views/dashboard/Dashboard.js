@@ -116,7 +116,6 @@ const Dashboard = () => {
     setIP(res.data.IPv4)
   }
   const upload = async () => {
-    getData()
     setIsLoading(true);
     setClientName();
     setClientId()
@@ -268,6 +267,7 @@ const Dashboard = () => {
   useEffect(() => {
     // getClientList();
     setClientList(myData.result)
+    getData()
   }, [myData]);
   return (
     <>
