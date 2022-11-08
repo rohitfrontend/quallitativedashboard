@@ -3,13 +3,16 @@
     float: right;
  
 }
+.mt-0{margin-top: 0;}
+.mt-5{margin-top: 5px !important;}
+.mt-10{margin-top: 10px !important;}
 .uqr-contents{    padding: 12px 0px;
     background: white;
-    margin: 0 35px;
+    margin: 60px 35px 20px 35px;
     box-shadow: 0 4px 30px -8px rgb(125 112 188 / 30%);
     border-left: 1px solid rgba(106,75,255,.1);
     position: relative;
-    top: 80px;
+    
 }
 
 .view-setting{
@@ -24,6 +27,7 @@
     padding: 15px;
    
 }
+.img-note{font-size: 14px; color: #938fa9;}
 .css-1s2u09g-control{
     height: 36px;
     border: 1px solid rgba(106,75,255,.2);
@@ -71,7 +75,7 @@ form.needs-validation label{
     font-weight: 600;
     font-family: 'Manrope', sans-serif;
 }
-
+form.needs-validation{padding: 20px;}
 .css-319lph-ValueContainer{
     height: 36px;
     box-shadow: 0 4px 24px -8px rgb(125 112 188 / 20%);
@@ -114,7 +118,7 @@ form.needs-validation label{
 
     
 }
-
+.filter{background-color: #fff;}
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{background-color: transparent;     }
 
 .leftNavigationWrap a.active span.menuIcon{

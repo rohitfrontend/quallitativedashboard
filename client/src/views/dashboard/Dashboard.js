@@ -403,8 +403,7 @@ const Dashboard = () => {
 
         </div>
          )}
-        <div class="container ">
-        <div class="row">
+        <div class="col-12 ">
 {setting?.map((e, index) => (
         <div class="card" key={index} style={{ width: "18rem"}}>
 <div class="card-body">
@@ -423,7 +422,6 @@ const Dashboard = () => {
 </div>
 ))}
 </div>
-</div>
 
               <div class="col-12">
                 <label for="vertical" class="form-label">Vertical</label>
@@ -435,23 +433,18 @@ const Dashboard = () => {
 
               </div>
               {is_vertical === "1" && (
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-9">
+                <div class="col-12 ">
                 {/* <label for="vertical" class="form-label">Add </label> */}
                 <input type="text" class="form-control" id="vertical" onChange={e => setVertical(e.target.value)}  placeholder=""  />
               
                       
 
-                    </div>
-                    <div class="col-3">
+                    <div class="col-12 mt-10">
                       <button class="btn btn-primary" onClick={e => addVertical ()} type="button" >Add Vertical</button>
                     </div>
-                  </div>
                 </div>
               )}
-              <div class="container ">
-                <div class="row">
+              <div class="col-12 ">
                   {verticals?.map((e, index) => (
                     <div class="card" key={index} style={{ width: "18rem" }}>
                       <div class="card-body">
@@ -462,7 +455,7 @@ const Dashboard = () => {
                     </div>
                   ))}
 
-                </div></div>
+                </div>
                 <div class="col-12">
                 <label for="state" class="form-label">Filter</label>
                 <div class="form-check">
@@ -479,16 +472,15 @@ const Dashboard = () => {
                       </div>
 
               </div>
-              <div class="col-md-3">
+              <div class="col-12 ">
                 <label for="zip" class="form-label">Document</label>
                 <input type="file" class="form-control" id="zip" onChange={onFileChange} placeholder="" required />
-                <div class="">
+                <div class="mt-10 img-note">
                Check the sample file before upload <a href="" target="_blank">Sample file</a>
               </div>
               </div>
             </div>
 
-            <br></br>
             <br></br>
            {isLoading && <h5 class="loading">uploading</h5> }
       <p ref={statusRef}></p>
